@@ -87,6 +87,18 @@ export class BaseController<T extends Model> {
     }
     return record;
   }
+
+  async findAll(attributes: Partial<T>) {
+    Logger.info('Trying to find', this.model.name, 'with attributes:', attributes);
+
+    const record = await this.model.findAll({ where: attributes as any });
+    if (! record) {
+      Logger.warn(this.model.name, 'not found with attributes', attributes);
+      return null;
+    }
+    return record;
+  }
+
 }
 
 export default BaseController
