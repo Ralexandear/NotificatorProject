@@ -8,7 +8,7 @@ class ShopControllerClass extends BaseController<Shop> {
     super(Shop)
   }
 
-  static async find(...names: (string| null)[]) {
+  async findByName(...names: (string| null)[]) {
     names = names.filter(e => e); //removing emptiness
 
     if (! names.length) {
@@ -18,7 +18,7 @@ class ShopControllerClass extends BaseController<Shop> {
     
     Logger.log('Searching shop by name', names)
     
-    const model = await Shop.findOne({
+    const shop = await Shop.findOne({
       where: {
         [Op.or]: [
           ...names.map(name => ({ name: { [Op.iLike]: name } })),
@@ -27,13 +27,13 @@ class ShopControllerClass extends BaseController<Shop> {
       }
     })
 
-    if (! model) {
+    if (! shop) {
       Logger.warn(`Shop with name from list"${names}" not found!`)
       return null
     }
 
-    Logger.log(`Shop found. Name:`, model.name, 'id', model.id)
-    return new Shop(model)
+    Logger.log(`Shop found. Name:`, shop.name, 'id', shop.id)
+    return shop
   }
 }
 

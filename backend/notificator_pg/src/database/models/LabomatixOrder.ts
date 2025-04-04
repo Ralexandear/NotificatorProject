@@ -8,6 +8,6 @@ export class LabomatixOrder extends Model<LabomatixOrderAttributes, LabomatixOrd
   status!: LabomatixOrderStatusType;
   mongoUpdateId!: string;
   packetNumber!: number | null;
-  shopId!: number;
+  shopId!: number | null;
   orderDateTime!: Date;
 }

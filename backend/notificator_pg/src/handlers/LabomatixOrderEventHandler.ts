@@ -9,13 +9,13 @@ export async function LabomatixOrderEventHandler(event: KafkaPostgresRequestAttr
 
   switch (event.action) {
     case 'CREATE':
-      return LabomatixOrderController.create(event.data.messageId, event.data.mongoUpdateId, event.data.status);
+      return LabomatixOrderController.create(event.data);
 
     case 'FIND_OR_CREATE':
-      return LabomatixOrderController.findOrCreate
+      return LabomatixOrderController.findOrCreate(event.data)
     
     case 'UPDATE':
-      return LabomatixOrderController.update(event.data)
+      return LabomatixOrderController.update({id: event.data.id}, event.data)
 
     case 'DELETE':
       return LabomatixOrderController.delete(event.data.id)
@@ -38,7 +38,7 @@ export async function LabomatixOrderEventHandler(event: KafkaPostgresRequestAttr
 
 
     default:
-      throw new Error(`Invalid action: ${event.action}`);
+      throw new ValidationError(`Invalid action: ${event.action} for topic ` + event.topic);
   }
   
 }

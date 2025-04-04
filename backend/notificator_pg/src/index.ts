@@ -2,9 +2,10 @@ import kafka from 'kafka-node';
 import Logger from './shared/utils/Logger';
 import { KafkaActionType, KafkaPostgresRequestAttributes, KafkaRequestTopicNameType } from './shared/interfaces/KafkaRequestAttributes';
 import { UserEventHandler } from './handlers/UserEventHandler';
-import { ShopEventHandler } from './handlers/ShopEventHandler';
 import { LabomatixOrderEventHandler } from './handlers/LabomatixOrderEventHandler';
 import { KafkaPostgresResponseAttributes, KafkaResponseStatus, KafkaResponseTopicNameType } from './shared/interfaces/KafkaResponseAttributes';
+import { ValidationError } from './shared/errors/ValidationError';
+import { ShopEventHandlder } from './handlers/ShopEventHandler';
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -105,7 +106,7 @@ consumer.on('message', async (message) => {
     responseTopic = 'notificator-db-user-response'
   }
   else if (topic === 'notificator-db-shop-requests') {
-    handler = ShopEventHandler
+    handler = ShopEventHandlder
     responseTopic = 'notificator-db-shop-response'
   }
   // else if (topic === 'pg-point-events') handler = PointEventHandler
@@ -123,12 +124,18 @@ consumer.on('message', async (message) => {
 
 
   try {
-    const responseData = await handler(data);
+    response.data = await handler(data);
     response.status = response.data ? 'OK' : 'NOT_FOUND';
   }
   catch (error) {
-    response.status = 'ERROR';
-    response.data = error;
+    if (error instanceof ValidationError) {
+      response.status = 'INVALID_DATA';
+      response.data = error.message;
+    } else {
+      response.status = 'ERROR';
+      response.data = error;
+    }
+
     Logger.error('FATAL ERROR:', error, error instanceof Error ? error.stack : '');
   }
   finally {
