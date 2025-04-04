@@ -14,14 +14,27 @@ import { PointSequelizeModel } from './database/models/Point';
 import { newBotMessageHandler } from './handlers/NewBotMessageHandler';
 
 // Создаём потоки для перенаправления стандартного вывода и ошибок
-const logOut = fs.createWriteStream('./log.out', { flags: 'a' }); // Файл для вывода (дозапись)
-const logErr = fs.createWriteStream('./log.out', { flags: 'a' }); // Файл для ошибок (дозапись)
+const logFile = fs.createWriteStream('./logs/output.log', { flags: 'a' });
+const errorFile = fs.createWriteStream('./logs/error.log', { flags: 'a' });
 
-// Перенаправляем стандартный вывод и ошибки
-//@ts-ignore
-process.stdout.write = logOut.write.bind(logOut);
-//@ts-ignore
-process.stderr.write = logErr.write.bind(logErr);
+const logStream = new (require('stream').Writable)({
+  write(chunk: any, encoding: any, callback: any) {
+    process.stdout.write(chunk); // Вывод в консоль
+    logFile.write(chunk); // Запись в файл
+    callback();
+  }
+});
+
+const errorStream = new (require('stream').Writable)({
+  write(chunk: any, encoding: any, callback: any) {
+    process.stderr.write(chunk); // Вывод в консоль ошибок
+    errorFile.write(chunk); // Запись в файл ошибок
+    callback();
+  }
+});
+
+process.stdout.write = logStream.write.bind(logStream);
+process.stderr.write = errorStream.write.bind(errorStream);
 
 
 

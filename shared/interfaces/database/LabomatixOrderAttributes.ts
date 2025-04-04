@@ -10,10 +10,9 @@ export interface LabomatixOrderAttributes {
   mongoUpdateId: string;
   packetNumber: number | null;
   shopId: number | null,
-  orderDateTime: Date | null;
 }
 
-export interface LabomatixOrderCreationAttributes extends Optional<LabomatixOrderAttributes, 'id' | 'shopId' | 'orderDateTime'> {}
+export interface LabomatixOrderCreationAttributes extends Optional<LabomatixOrderAttributes, 'id' | 'shopId'> {}
 
 export type LabomatixOrderUpdateAttributes = { id: number } & Partial<LabomatixOrderAttributes>;
 export type LabomatixOrderDeleteAttributes = {id: number};

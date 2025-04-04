@@ -1,4 +1,5 @@
 import { LabomatixOrderCreationAttributes, LabomatixOrderDeleteAttributes, LabomatixOrderFindAttributes, LabomatixOrderUpdateAttributes } from "./database/LabomatixOrderAttributes";
+import { PointCreationAttributes, PointDeleteAttributes, PointFindAttributes, PointUpdateAttributes } from "./database/PointAttributes";
 import { ShopCreationAttributes, ShopDeleteAttributes, ShopFindAttributes, ShopUpdateAttributes } from "./database/ShopAttributes";
 
 // Определяем список топиков
@@ -30,16 +31,19 @@ type KafkaActionDataMap = {
   };
   'notificator-db-shop-requests': {
     CREATE: ShopCreationAttributes;
+    FIND_OR_CREATE: ShopCreationAttributes;
     UPDATE: ShopUpdateAttributes;
     DELETE: ShopDeleteAttributes;
     FIND: ShopFindAttributes;
-    // GET: { shopId: number };
+    GET: { id: number };
   };
-  'notificator-db-user-requests': {
-    CREATE: { userId: number; name: string; email: string };
-    UPDATE: { userId: number; updatedFields: Record<string, unknown> };
-    DELETE: { userId: number };
-    GET: { userId: number };
+  'notificator-db-point-requests': {
+    CREATE: PointCreationAttributes;
+    FIND_OR_CREATE: PointCreationAttributes;
+    UPDATE: PointUpdateAttributes;
+    DELETE: PointDeleteAttributes;
+    FIND: PointFindAttributes;
+    GET: { id: number };
   };
 };
 
