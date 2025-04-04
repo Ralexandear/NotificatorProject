@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsdom": "^26.0.0",
+    "kafka-node": "^5.0.0",
+    "mongodb": "^6.15.0",
+    "pg": "^8.14.1",
+    "prebuilt-tdlib": "^0.1008040.0",
+    "sequelize": "^6.37.7",
+    "tdl": "^8.0.2"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7",
+    "@types/mongodb": "^4.0.6",
+    "@types/node": "^22.13.11",
+    "@types/pg": "^8.11.11",
+    "@types/sequelize": "^4.28.20",
+    "nodemon": "^3.1.9"
+  },
+  "scripts": {
+    "dev": "nodemon --watch src "
+  }
+}

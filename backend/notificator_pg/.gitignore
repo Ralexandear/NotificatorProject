@@ -1,0 +1,6 @@
+.env
+node_modules
+td
+_td*
+log.out
+*.log

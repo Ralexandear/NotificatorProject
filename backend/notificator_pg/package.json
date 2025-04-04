@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "kafka-node": "^5.0.0",
+    "pg": "^8.14.1",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11",
+    "@types/pg": "^8.11.11",
+    "@types/sequelize": "^4.28.20",
+    "nodemon": "^3.1.9"
+  },
+  "scripts": {
+    "dev": "nodemon --watch src "
+  }
+}

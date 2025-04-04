@@ -1,0 +1,3187 @@
+[
+  {
+    "shopId": 1,
+    "dayId": 1,
+    "pointId": 10
+  },
+  {
+    "shopId": 1,
+    "dayId": 2,
+    "pointId": 10
+  },
+  {
+    "shopId": 1,
+    "dayId": 3,
+    "pointId": 10
+  },
+  {
+    "shopId": 1,
+    "dayId": 4,
+    "pointId": 10
+  },
+  {
+    "shopId": 1,
+    "dayId": 5,
+    "pointId": 10
+  },
+  {
+    "shopId": 1,
+    "dayId": 6,
+    "pointId": 8
+  },
+  {
+    "shopId": 1,
+    "dayId": 0,
+    "pointId": 8
+  },
+  {
+    "shopId": 2,
+    "dayId": 1,
+    "pointId": 12
+  },
+  {
+    "shopId": 2,
+    "dayId": 2,
+    "pointId": 12
+  },
+  {
+    "shopId": 2,
+    "dayId": 3,
+    "pointId": 12
+  },
+  {
+    "shopId": 2,
+    "dayId": 4,
+    "pointId": 12
+  },
+  {
+    "shopId": 2,
+    "dayId": 5,
+    "pointId": 12
+  },
+  {
+    "shopId": 2,
+    "dayId": 6,
+    "pointId": 12
+  },
+  {
+    "shopId": 2,
+    "dayId": 0,
+    "pointId": 12
+  },
+  {
+    "shopId": 3,
+    "dayId": 1,
+    "pointId": 12
+  },
+  {
+    "shopId": 3,
+    "dayId": 2,
+    "pointId": 12
+  },
+  {
+    "shopId": 3,
+    "dayId": 3,
+    "pointId": 12
+  },
+  {
+    "shopId": 3,
+    "dayId": 4,
+    "pointId": 12
+  },
+  {
+    "shopId": 3,
+    "dayId": 5,
+    "pointId": 12
+  },
+  {
+    "shopId": 3,
+    "dayId": 6,
+    "pointId": 12
+  },
+  {
+    "shopId": 3,
+    "dayId": 0,
+    "pointId": 12
+  },
+  {
+    "shopId": 4,
+    "dayId": 1,
+    "pointId": 12
+  },
+  {
+    "shopId": 4,
+    "dayId": 2,
+    "pointId": 12
+  },
+  {
+    "shopId": 4,
+    "dayId": 3,
+    "pointId": 12
+  },
+  {
+    "shopId": 4,
+    "dayId": 4,
+    "pointId": 12
+  },
+  {
+    "shopId": 4,
+    "dayId": 5,
+    "pointId": 12
+  },
+  {
+    "shopId": 4,
+    "dayId": 6,
+    "pointId": 12
+  },
+  {
+    "shopId": 4,
+    "dayId": 0,
+    "pointId": 12
+  },
+  {
+    "shopId": 5,
+    "dayId": 1,
+    "pointId": 13
+  },
+  {
+    "shopId": 5,
+    "dayId": 2,
+    "pointId": 13
+  },
+  {
+    "shopId": 5,
+    "dayId": 3,
+    "pointId": 13
+  },
+  {
+    "shopId": 5,
+    "dayId": 4,
+    "pointId": 13
+  },
+  {
+    "shopId": 5,
+    "dayId": 5,
+    "pointId": 13
+  },
+  {
+    "shopId": 5,
+    "dayId": 6,
+    "pointId": 13
+  },
+  {
+    "shopId": 5,
+    "dayId": 0,
+    "pointId": 13
+  },
+  {
+    "shopId": 6,
+    "dayId": 1,
+    "pointId": 13
+  },
+  {
+    "shopId": 6,
+    "dayId": 2,
+    "pointId": 13
+  },
+  {
+    "shopId": 6,
+    "dayId": 3,
+    "pointId": 13
+  },
+  {
+    "shopId": 6,
+    "dayId": 4,
+    "pointId": 13
+  },
+  {
+    "shopId": 6,
+    "dayId": 5,
+    "pointId": 13
+  },
+  {
+    "shopId": 6,
+    "dayId": 6,
+    "pointId": 13
+  },
+  {
+    "shopId": 6,
+    "dayId": 0,
+    "pointId": 13
+  },
+  {
+    "shopId": 7,
+    "dayId": 1,
+    "pointId": 13
+  },
+  {
+    "shopId": 7,
+    "dayId": 2,
+    "pointId": 13
+  },
+  {
+    "shopId": 7,
+    "dayId": 3,
+    "pointId": 13
+  },
+  {
+    "shopId": 7,
+    "dayId": 4,
+    "pointId": 13
+  },
+  {
+    "shopId": 7,
+    "dayId": 5,
+    "pointId": 13
+  },
+  {
+    "shopId": 7,
+    "dayId": 6,
+    "pointId": 13
+  },
+  {
+    "shopId": 7,
+    "dayId": 0,
+    "pointId": 13
+  },
+  {
+    "shopId": 8,
+    "dayId": 1,
+    "pointId": 14
+  },
+  {
+    "shopId": 8,
+    "dayId": 2,
+    "pointId": 14
+  },
+  {
+    "shopId": 8,
+    "dayId": 3,
+    "pointId": 14
+  },
+  {
+    "shopId": 8,
+    "dayId": 4,
+    "pointId": 14
+  },
+  {
+    "shopId": 8,
+    "dayId": 5,
+    "pointId": 14
+  },
+  {
+    "shopId": 8,
+    "dayId": 6,
+    "pointId": 14
+  },
+  {
+    "shopId": 8,
+    "dayId": 0,
+    "pointId": 14
+  },
+  {
+    "shopId": 9,
+    "dayId": 1,
+    "pointId": 14
+  },
+  {
+    "shopId": 9,
+    "dayId": 2,
+    "pointId": 14
+  },
+  {
+    "shopId": 9,
+    "dayId": 3,
+    "pointId": 14
+  },
+  {
+    "shopId": 9,
+    "dayId": 4,
+    "pointId": 14
+  },
+  {
+    "shopId": 9,
+    "dayId": 5,
+    "pointId": 14
+  },
+  {
+    "shopId": 9,
+    "dayId": 6,
+    "pointId": 14
+  },
+  {
+    "shopId": 9,
+    "dayId": 0,
+    "pointId": 14
+  },
+  {
+    "shopId": 10,
+    "dayId": 1,
+    "pointId": 14
+  },
+  {
+    "shopId": 10,
+    "dayId": 2,
+    "pointId": 14
+  },
+  {
+    "shopId": 10,
+    "dayId": 3,
+    "pointId": 14
+  },
+  {
+    "shopId": 10,
+    "dayId": 4,
+    "pointId": 14
+  },
+  {
+    "shopId": 10,
+    "dayId": 5,
+    "pointId": 14
+  },
+  {
+    "shopId": 10,
+    "dayId": 6,
+    "pointId": 14
+  },
+  {
+    "shopId": 10,
+    "dayId": 0,
+    "pointId": 14
+  },
+  {
+    "shopId": 11,
+    "dayId": 1,
+    "pointId": 14
+  },
+  {
+    "shopId": 11,
+    "dayId": 2,
+    "pointId": 14
+  },
+  {
+    "shopId": 11,
+    "dayId": 3,
+    "pointId": 14
+  },
+  {
+    "shopId": 11,
+    "dayId": 4,
+    "pointId": 14
+  },
+  {
+    "shopId": 11,
+    "dayId": 5,
+    "pointId": 14
+  },
+  {
+    "shopId": 11,
+    "dayId": 6,
+    "pointId": 14
+  },
+  {
+    "shopId": 11,
+    "dayId": 0,
+    "pointId": 14
+  },
+  {
+    "shopId": 12,
+    "dayId": 1,
+    "pointId": 15
+  },
+  {
+    "shopId": 12,
+    "dayId": 2,
+    "pointId": 15
+  },
+  {
+    "shopId": 12,
+    "dayId": 3,
+    "pointId": 15
+  },
+  {
+    "shopId": 12,
+    "dayId": 4,
+    "pointId": 15
+  },
+  {
+    "shopId": 12,
+    "dayId": 5,
+    "pointId": 15
+  },
+  {
+    "shopId": 12,
+    "dayId": 6,
+    "pointId": 15
+  },
+  {
+    "shopId": 12,
+    "dayId": 0,
+    "pointId": 15
+  },
+  {
+    "shopId": 13,
+    "dayId": 1,
+    "pointId": 15
+  },
+  {
+    "shopId": 13,
+    "dayId": 2,
+    "pointId": 15
+  },
+  {
+    "shopId": 13,
+    "dayId": 3,
+    "pointId": 15
+  },
+  {
+    "shopId": 13,
+    "dayId": 4,
+    "pointId": 15
+  },
+  {
+    "shopId": 13,
+    "dayId": 5,
+    "pointId": 15
+  },
+  {
+    "shopId": 13,
+    "dayId": 6,
+    "pointId": 15
+  },
+  {
+    "shopId": 13,
+    "dayId": 0,
+    "pointId": 15
+  },
+  {
+    "shopId": 14,
+    "dayId": 1,
+    "pointId": 16
+  },
+  {
+    "shopId": 14,
+    "dayId": 2,
+    "pointId": 16
+  },
+  {
+    "shopId": 14,
+    "dayId": 3,
+    "pointId": 16
+  },
+  {
+    "shopId": 14,
+    "dayId": 4,
+    "pointId": 16
+  },
+  {
+    "shopId": 14,
+    "dayId": 5,
+    "pointId": 16
+  },
+  {
+    "shopId": 14,
+    "dayId": 6,
+    "pointId": 16
+  },
+  {
+    "shopId": 14,
+    "dayId": 0,
+    "pointId": 16
+  },
+  {
+    "shopId": 15,
+    "dayId": 1,
+    "pointId": 16
+  },
+  {
+    "shopId": 15,
+    "dayId": 2,
+    "pointId": 16
+  },
+  {
+    "shopId": 15,
+    "dayId": 3,
+    "pointId": 16
+  },
+  {
+    "shopId": 15,
+    "dayId": 4,
+    "pointId": 16
+  },
+  {
+    "shopId": 15,
+    "dayId": 5,
+    "pointId": 16
+  },
+  {
+    "shopId": 15,
+    "dayId": 6,
+    "pointId": 16
+  },
+  {
+    "shopId": 15,
+    "dayId": 0,
+    "pointId": 16
+  },
+  {
+    "shopId": 16,
+    "dayId": 1,
+    "pointId": 17
+  },
+  {
+    "shopId": 16,
+    "dayId": 2,
+    "pointId": 17
+  },
+  {
+    "shopId": 16,
+    "dayId": 3,
+    "pointId": 17
+  },
+  {
+    "shopId": 16,
+    "dayId": 4,
+    "pointId": 17
+  },
+  {
+    "shopId": 16,
+    "dayId": 5,
+    "pointId": 17
+  },
+  {
+    "shopId": 16,
+    "dayId": 6,
+    "pointId": 17
+  },
+  {
+    "shopId": 16,
+    "dayId": 0,
+    "pointId": 17
+  },
+  {
+    "shopId": 17,
+    "dayId": 1,
+    "pointId": 17
+  },
+  {
+    "shopId": 17,
+    "dayId": 2,
+    "pointId": 17
+  },
+  {
+    "shopId": 17,
+    "dayId": 3,
+    "pointId": 17
+  },
+  {
+    "shopId": 17,
+    "dayId": 4,
+    "pointId": 17
+  },
+  {
+    "shopId": 17,
+    "dayId": 5,
+    "pointId": 17
+  },
+  {
+    "shopId": 17,
+    "dayId": 6,
+    "pointId": 17
+  },
+  {
+    "shopId": 17,
+    "dayId": 0,
+    "pointId": 17
+  },
+  {
+    "shopId": 18,
+    "dayId": 1,
+    "pointId": 17
+  },
+  {
+    "shopId": 18,
+    "dayId": 2,
+    "pointId": 17
+  },
+  {
+    "shopId": 18,
+    "dayId": 3,
+    "pointId": 17
+  },
+  {
+    "shopId": 18,
+    "dayId": 4,
+    "pointId": 17
+  },
+  {
+    "shopId": 18,
+    "dayId": 5,
+    "pointId": 17
+  },
+  {
+    "shopId": 18,
+    "dayId": 6,
+    "pointId": 17
+  },
+  {
+    "shopId": 18,
+    "dayId": 0,
+    "pointId": 17
+  },
+  {
+    "shopId": 19,
+    "dayId": 1,
+    "pointId": 19
+  },
+  {
+    "shopId": 19,
+    "dayId": 2,
+    "pointId": 19
+  },
+  {
+    "shopId": 19,
+    "dayId": 3,
+    "pointId": 19
+  },
+  {
+    "shopId": 19,
+    "dayId": 4,
+    "pointId": 19
+  },
+  {
+    "shopId": 19,
+    "dayId": 5,
+    "pointId": 19
+  },
+  {
+    "shopId": 19,
+    "dayId": 6,
+    "pointId": 15
+  },
+  {
+    "shopId": 19,
+    "dayId": 0,
+    "pointId": 15
+  },
+  {
+    "shopId": 20,
+    "dayId": 1,
+    "pointId": 19
+  },
+  {
+    "shopId": 20,
+    "dayId": 2,
+    "pointId": 19
+  },
+  {
+    "shopId": 20,
+    "dayId": 3,
+    "pointId": 19
+  },
+  {
+    "shopId": 20,
+    "dayId": 4,
+    "pointId": 19
+  },
+  {
+    "shopId": 20,
+    "dayId": 5,
+    "pointId": 19
+  },
+  {
+    "shopId": 20,
+    "dayId": 6,
+    "pointId": 15
+  },
+  {
+    "shopId": 20,
+    "dayId": 0,
+    "pointId": 15
+  },
+  {
+    "shopId": 21,
+    "dayId": 1,
+    "pointId": 2
+  },
+  {
+    "shopId": 21,
+    "dayId": 2,
+    "pointId": 2
+  },
+  {
+    "shopId": 21,
+    "dayId": 3,
+    "pointId": 2
+  },
+  {
+    "shopId": 21,
+    "dayId": 4,
+    "pointId": 2
+  },
+  {
+    "shopId": 21,
+    "dayId": 5,
+    "pointId": 2
+  },
+  {
+    "shopId": 21,
+    "dayId": 6,
+    "pointId": 2
+  },
+  {
+    "shopId": 21,
+    "dayId": 0,
+    "pointId": 2
+  },
+  {
+    "shopId": 22,
+    "dayId": 1,
+    "pointId": 2
+  },
+  {
+    "shopId": 22,
+    "dayId": 2,
+    "pointId": 2
+  },
+  {
+    "shopId": 22,
+    "dayId": 3,
+    "pointId": 2
+  },
+  {
+    "shopId": 22,
+    "dayId": 4,
+    "pointId": 2
+  },
+  {
+    "shopId": 22,
+    "dayId": 5,
+    "pointId": 2
+  },
+  {
+    "shopId": 22,
+    "dayId": 6,
+    "pointId": 2
+  },
+  {
+    "shopId": 22,
+    "dayId": 0,
+    "pointId": 2
+  },
+  {
+    "shopId": 23,
+    "dayId": 1,
+    "pointId": 2
+  },
+  {
+    "shopId": 23,
+    "dayId": 2,
+    "pointId": 2
+  },
+  {
+    "shopId": 23,
+    "dayId": 3,
+    "pointId": 2
+  },
+  {
+    "shopId": 23,
+    "dayId": 4,
+    "pointId": 2
+  },
+  {
+    "shopId": 23,
+    "dayId": 5,
+    "pointId": 2
+  },
+  {
+    "shopId": 23,
+    "dayId": 6,
+    "pointId": 2
+  },
+  {
+    "shopId": 23,
+    "dayId": 0,
+    "pointId": 2
+  },
+  {
+    "shopId": 24,
+    "dayId": 1,
+    "pointId": 2
+  },
+  {
+    "shopId": 24,
+    "dayId": 2,
+    "pointId": 2
+  },
+  {
+    "shopId": 24,
+    "dayId": 3,
+    "pointId": 2
+  },
+  {
+    "shopId": 24,
+    "dayId": 4,
+    "pointId": 2
+  },
+  {
+    "shopId": 24,
+    "dayId": 5,
+    "pointId": 2
+  },
+  {
+    "shopId": 24,
+    "dayId": 6,
+    "pointId": 2
+  },
+  {
+    "shopId": 24,
+    "dayId": 0,
+    "pointId": 2
+  },
+  {
+    "shopId": 25,
+    "dayId": 1,
+    "pointId": 20
+  },
+  {
+    "shopId": 25,
+    "dayId": 2,
+    "pointId": 20
+  },
+  {
+    "shopId": 25,
+    "dayId": 3,
+    "pointId": 20
+  },
+  {
+    "shopId": 25,
+    "dayId": 4,
+    "pointId": 20
+  },
+  {
+    "shopId": 25,
+    "dayId": 5,
+    "pointId": 20
+  },
+  {
+    "shopId": 25,
+    "dayId": 6,
+    "pointId": 20
+  },
+  {
+    "shopId": 25,
+    "dayId": 0,
+    "pointId": 20
+  },
+  {
+    "shopId": 26,
+    "dayId": 1,
+    "pointId": 20
+  },
+  {
+    "shopId": 26,
+    "dayId": 2,
+    "pointId": 20
+  },
+  {
+    "shopId": 26,
+    "dayId": 3,
+    "pointId": 20
+  },
+  {
+    "shopId": 26,
+    "dayId": 4,
+    "pointId": 20
+  },
+  {
+    "shopId": 26,
+    "dayId": 5,
+    "pointId": 20
+  },
+  {
+    "shopId": 26,
+    "dayId": 6,
+    "pointId": 20
+  },
+  {
+    "shopId": 26,
+    "dayId": 0,
+    "pointId": 20
+  },
+  {
+    "shopId": 27,
+    "dayId": 1,
+    "pointId": 20
+  },
+  {
+    "shopId": 27,
+    "dayId": 2,
+    "pointId": 20
+  },
+  {
+    "shopId": 27,
+    "dayId": 3,
+    "pointId": 20
+  },
+  {
+    "shopId": 27,
+    "dayId": 4,
+    "pointId": 20
+  },
+  {
+    "shopId": 27,
+    "dayId": 5,
+    "pointId": 20
+  },
+  {
+    "shopId": 27,
+    "dayId": 6,
+    "pointId": 20
+  },
+  {
+    "shopId": 27,
+    "dayId": 0,
+    "pointId": 20
+  },
+  {
+    "shopId": 28,
+    "dayId": 1,
+    "pointId": 21
+  },
+  {
+    "shopId": 28,
+    "dayId": 2,
+    "pointId": 21
+  },
+  {
+    "shopId": 28,
+    "dayId": 3,
+    "pointId": 21
+  },
+  {
+    "shopId": 28,
+    "dayId": 4,
+    "pointId": 21
+  },
+  {
+    "shopId": 28,
+    "dayId": 5,
+    "pointId": 21
+  },
+  {
+    "shopId": 28,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 28,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 29,
+    "dayId": 1,
+    "pointId": 21
+  },
+  {
+    "shopId": 29,
+    "dayId": 2,
+    "pointId": 21
+  },
+  {
+    "shopId": 29,
+    "dayId": 3,
+    "pointId": 21
+  },
+  {
+    "shopId": 29,
+    "dayId": 4,
+    "pointId": 21
+  },
+  {
+    "shopId": 29,
+    "dayId": 5,
+    "pointId": 21
+  },
+  {
+    "shopId": 29,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 29,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 30,
+    "dayId": 1,
+    "pointId": 21
+  },
+  {
+    "shopId": 30,
+    "dayId": 2,
+    "pointId": 21
+  },
+  {
+    "shopId": 30,
+    "dayId": 3,
+    "pointId": 21
+  },
+  {
+    "shopId": 30,
+    "dayId": 4,
+    "pointId": 21
+  },
+  {
+    "shopId": 30,
+    "dayId": 5,
+    "pointId": 21
+  },
+  {
+    "shopId": 30,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 30,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 31,
+    "dayId": 1,
+    "pointId": 21
+  },
+  {
+    "shopId": 31,
+    "dayId": 2,
+    "pointId": 21
+  },
+  {
+    "shopId": 31,
+    "dayId": 3,
+    "pointId": 21
+  },
+  {
+    "shopId": 31,
+    "dayId": 4,
+    "pointId": 21
+  },
+  {
+    "shopId": 31,
+    "dayId": 5,
+    "pointId": 21
+  },
+  {
+    "shopId": 31,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 31,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 32,
+    "dayId": 1,
+    "pointId": 22
+  },
+  {
+    "shopId": 32,
+    "dayId": 2,
+    "pointId": 22
+  },
+  {
+    "shopId": 32,
+    "dayId": 3,
+    "pointId": 22
+  },
+  {
+    "shopId": 32,
+    "dayId": 4,
+    "pointId": 22
+  },
+  {
+    "shopId": 32,
+    "dayId": 5,
+    "pointId": 22
+  },
+  {
+    "shopId": 32,
+    "dayId": 6,
+    "pointId": 22
+  },
+  {
+    "shopId": 32,
+    "dayId": 0,
+    "pointId": 22
+  },
+  {
+    "shopId": 33,
+    "dayId": 1,
+    "pointId": 22
+  },
+  {
+    "shopId": 33,
+    "dayId": 2,
+    "pointId": 22
+  },
+  {
+    "shopId": 33,
+    "dayId": 3,
+    "pointId": 22
+  },
+  {
+    "shopId": 33,
+    "dayId": 4,
+    "pointId": 22
+  },
+  {
+    "shopId": 33,
+    "dayId": 5,
+    "pointId": 22
+  },
+  {
+    "shopId": 33,
+    "dayId": 6,
+    "pointId": 22
+  },
+  {
+    "shopId": 33,
+    "dayId": 0,
+    "pointId": 22
+  },
+  {
+    "shopId": 34,
+    "dayId": 1,
+    "pointId": 22
+  },
+  {
+    "shopId": 34,
+    "dayId": 2,
+    "pointId": 22
+  },
+  {
+    "shopId": 34,
+    "dayId": 3,
+    "pointId": 22
+  },
+  {
+    "shopId": 34,
+    "dayId": 4,
+    "pointId": 22
+  },
+  {
+    "shopId": 34,
+    "dayId": 5,
+    "pointId": 22
+  },
+  {
+    "shopId": 34,
+    "dayId": 6,
+    "pointId": 22
+  },
+  {
+    "shopId": 34,
+    "dayId": 0,
+    "pointId": 22
+  },
+  {
+    "shopId": 35,
+    "dayId": 1,
+    "pointId": 23
+  },
+  {
+    "shopId": 35,
+    "dayId": 2,
+    "pointId": 23
+  },
+  {
+    "shopId": 35,
+    "dayId": 3,
+    "pointId": 23
+  },
+  {
+    "shopId": 35,
+    "dayId": 4,
+    "pointId": 23
+  },
+  {
+    "shopId": 35,
+    "dayId": 5,
+    "pointId": 23
+  },
+  {
+    "shopId": 35,
+    "dayId": 6,
+    "pointId": 23
+  },
+  {
+    "shopId": 35,
+    "dayId": 0,
+    "pointId": 23
+  },
+  {
+    "shopId": 36,
+    "dayId": 1,
+    "pointId": 23
+  },
+  {
+    "shopId": 36,
+    "dayId": 2,
+    "pointId": 23
+  },
+  {
+    "shopId": 36,
+    "dayId": 3,
+    "pointId": 23
+  },
+  {
+    "shopId": 36,
+    "dayId": 4,
+    "pointId": 23
+  },
+  {
+    "shopId": 36,
+    "dayId": 5,
+    "pointId": 23
+  },
+  {
+    "shopId": 36,
+    "dayId": 6,
+    "pointId": 23
+  },
+  {
+    "shopId": 36,
+    "dayId": 0,
+    "pointId": 23
+  },
+  {
+    "shopId": 37,
+    "dayId": 1,
+    "pointId": 23
+  },
+  {
+    "shopId": 37,
+    "dayId": 2,
+    "pointId": 23
+  },
+  {
+    "shopId": 37,
+    "dayId": 3,
+    "pointId": 23
+  },
+  {
+    "shopId": 37,
+    "dayId": 4,
+    "pointId": 23
+  },
+  {
+    "shopId": 37,
+    "dayId": 5,
+    "pointId": 23
+  },
+  {
+    "shopId": 37,
+    "dayId": 6,
+    "pointId": 23
+  },
+  {
+    "shopId": 37,
+    "dayId": 0,
+    "pointId": 23
+  },
+  {
+    "shopId": 38,
+    "dayId": 1,
+    "pointId": 24
+  },
+  {
+    "shopId": 38,
+    "dayId": 2,
+    "pointId": 24
+  },
+  {
+    "shopId": 38,
+    "dayId": 3,
+    "pointId": 24
+  },
+  {
+    "shopId": 38,
+    "dayId": 4,
+    "pointId": 24
+  },
+  {
+    "shopId": 38,
+    "dayId": 5,
+    "pointId": 24
+  },
+  {
+    "shopId": 38,
+    "dayId": 6,
+    "pointId": 24
+  },
+  {
+    "shopId": 38,
+    "dayId": 0,
+    "pointId": 24
+  },
+  {
+    "shopId": 39,
+    "dayId": 1,
+    "pointId": 24
+  },
+  {
+    "shopId": 39,
+    "dayId": 2,
+    "pointId": 24
+  },
+  {
+    "shopId": 39,
+    "dayId": 3,
+    "pointId": 24
+  },
+  {
+    "shopId": 39,
+    "dayId": 4,
+    "pointId": 24
+  },
+  {
+    "shopId": 39,
+    "dayId": 5,
+    "pointId": 24
+  },
+  {
+    "shopId": 39,
+    "dayId": 6,
+    "pointId": 24
+  },
+  {
+    "shopId": 39,
+    "dayId": 0,
+    "pointId": 24
+  },
+  {
+    "shopId": 40,
+    "dayId": 1,
+    "pointId": 24
+  },
+  {
+    "shopId": 40,
+    "dayId": 2,
+    "pointId": 24
+  },
+  {
+    "shopId": 40,
+    "dayId": 3,
+    "pointId": 24
+  },
+  {
+    "shopId": 40,
+    "dayId": 4,
+    "pointId": 24
+  },
+  {
+    "shopId": 40,
+    "dayId": 5,
+    "pointId": 24
+  },
+  {
+    "shopId": 40,
+    "dayId": 6,
+    "pointId": 24
+  },
+  {
+    "shopId": 40,
+    "dayId": 0,
+    "pointId": 24
+  },
+  {
+    "shopId": 41,
+    "dayId": 1,
+    "pointId": 25
+  },
+  {
+    "shopId": 41,
+    "dayId": 2,
+    "pointId": 25
+  },
+  {
+    "shopId": 41,
+    "dayId": 3,
+    "pointId": 25
+  },
+  {
+    "shopId": 41,
+    "dayId": 4,
+    "pointId": 25
+  },
+  {
+    "shopId": 41,
+    "dayId": 5,
+    "pointId": 25
+  },
+  {
+    "shopId": 41,
+    "dayId": 6,
+    "pointId": 25
+  },
+  {
+    "shopId": 41,
+    "dayId": 0,
+    "pointId": 25
+  },
+  {
+    "shopId": 42,
+    "dayId": 1,
+    "pointId": 25
+  },
+  {
+    "shopId": 42,
+    "dayId": 2,
+    "pointId": 25
+  },
+  {
+    "shopId": 42,
+    "dayId": 3,
+    "pointId": 25
+  },
+  {
+    "shopId": 42,
+    "dayId": 4,
+    "pointId": 25
+  },
+  {
+    "shopId": 42,
+    "dayId": 5,
+    "pointId": 25
+  },
+  {
+    "shopId": 42,
+    "dayId": 6,
+    "pointId": 25
+  },
+  {
+    "shopId": 42,
+    "dayId": 0,
+    "pointId": 25
+  },
+  {
+    "shopId": 43,
+    "dayId": 1,
+    "pointId": 25
+  },
+  {
+    "shopId": 43,
+    "dayId": 2,
+    "pointId": 25
+  },
+  {
+    "shopId": 43,
+    "dayId": 3,
+    "pointId": 25
+  },
+  {
+    "shopId": 43,
+    "dayId": 4,
+    "pointId": 25
+  },
+  {
+    "shopId": 43,
+    "dayId": 5,
+    "pointId": 25
+  },
+  {
+    "shopId": 43,
+    "dayId": 6,
+    "pointId": 25
+  },
+  {
+    "shopId": 43,
+    "dayId": 0,
+    "pointId": 25
+  },
+  {
+    "shopId": 44,
+    "dayId": 1,
+    "pointId": 25
+  },
+  {
+    "shopId": 44,
+    "dayId": 2,
+    "pointId": 25
+  },
+  {
+    "shopId": 44,
+    "dayId": 3,
+    "pointId": 25
+  },
+  {
+    "shopId": 44,
+    "dayId": 4,
+    "pointId": 25
+  },
+  {
+    "shopId": 44,
+    "dayId": 5,
+    "pointId": 25
+  },
+  {
+    "shopId": 44,
+    "dayId": 6,
+    "pointId": 25
+  },
+  {
+    "shopId": 44,
+    "dayId": 0,
+    "pointId": 25
+  },
+  {
+    "shopId": 45,
+    "dayId": 1,
+    "pointId": 25
+  },
+  {
+    "shopId": 45,
+    "dayId": 2,
+    "pointId": 25
+  },
+  {
+    "shopId": 45,
+    "dayId": 3,
+    "pointId": 25
+  },
+  {
+    "shopId": 45,
+    "dayId": 4,
+    "pointId": 25
+  },
+  {
+    "shopId": 45,
+    "dayId": 5,
+    "pointId": 25
+  },
+  {
+    "shopId": 45,
+    "dayId": 6,
+    "pointId": 25
+  },
+  {
+    "shopId": 45,
+    "dayId": 0,
+    "pointId": 25
+  },
+  {
+    "shopId": 46,
+    "dayId": 1,
+    "pointId": 26
+  },
+  {
+    "shopId": 46,
+    "dayId": 2,
+    "pointId": 26
+  },
+  {
+    "shopId": 46,
+    "dayId": 3,
+    "pointId": 26
+  },
+  {
+    "shopId": 46,
+    "dayId": 4,
+    "pointId": 26
+  },
+  {
+    "shopId": 46,
+    "dayId": 5,
+    "pointId": 26
+  },
+  {
+    "shopId": 46,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 46,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 47,
+    "dayId": 1,
+    "pointId": 26
+  },
+  {
+    "shopId": 47,
+    "dayId": 2,
+    "pointId": 26
+  },
+  {
+    "shopId": 47,
+    "dayId": 3,
+    "pointId": 26
+  },
+  {
+    "shopId": 47,
+    "dayId": 4,
+    "pointId": 26
+  },
+  {
+    "shopId": 47,
+    "dayId": 5,
+    "pointId": 26
+  },
+  {
+    "shopId": 47,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 47,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 48,
+    "dayId": 1,
+    "pointId": 26
+  },
+  {
+    "shopId": 48,
+    "dayId": 2,
+    "pointId": 26
+  },
+  {
+    "shopId": 48,
+    "dayId": 3,
+    "pointId": 26
+  },
+  {
+    "shopId": 48,
+    "dayId": 4,
+    "pointId": 26
+  },
+  {
+    "shopId": 48,
+    "dayId": 5,
+    "pointId": 26
+  },
+  {
+    "shopId": 48,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 48,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 49,
+    "dayId": 1,
+    "pointId": 29
+  },
+  {
+    "shopId": 49,
+    "dayId": 2,
+    "pointId": 29
+  },
+  {
+    "shopId": 49,
+    "dayId": 3,
+    "pointId": 29
+  },
+  {
+    "shopId": 49,
+    "dayId": 4,
+    "pointId": 29
+  },
+  {
+    "shopId": 49,
+    "dayId": 5,
+    "pointId": 29
+  },
+  {
+    "shopId": 49,
+    "dayId": 6,
+    "pointId": 29
+  },
+  {
+    "shopId": 49,
+    "dayId": 0,
+    "pointId": 29
+  },
+  {
+    "shopId": 50,
+    "dayId": 1,
+    "pointId": 29
+  },
+  {
+    "shopId": 50,
+    "dayId": 2,
+    "pointId": 29
+  },
+  {
+    "shopId": 50,
+    "dayId": 3,
+    "pointId": 29
+  },
+  {
+    "shopId": 50,
+    "dayId": 4,
+    "pointId": 29
+  },
+  {
+    "shopId": 50,
+    "dayId": 5,
+    "pointId": 29
+  },
+  {
+    "shopId": 50,
+    "dayId": 6,
+    "pointId": 29
+  },
+  {
+    "shopId": 50,
+    "dayId": 0,
+    "pointId": 29
+  },
+  {
+    "shopId": 51,
+    "dayId": 1,
+    "pointId": 29
+  },
+  {
+    "shopId": 51,
+    "dayId": 2,
+    "pointId": 29
+  },
+  {
+    "shopId": 51,
+    "dayId": 3,
+    "pointId": 29
+  },
+  {
+    "shopId": 51,
+    "dayId": 4,
+    "pointId": 29
+  },
+  {
+    "shopId": 51,
+    "dayId": 5,
+    "pointId": 29
+  },
+  {
+    "shopId": 51,
+    "dayId": 6,
+    "pointId": 29
+  },
+  {
+    "shopId": 51,
+    "dayId": 0,
+    "pointId": 29
+  },
+  {
+    "shopId": 52,
+    "dayId": 1,
+    "pointId": 29
+  },
+  {
+    "shopId": 52,
+    "dayId": 2,
+    "pointId": 29
+  },
+  {
+    "shopId": 52,
+    "dayId": 3,
+    "pointId": 29
+  },
+  {
+    "shopId": 52,
+    "dayId": 4,
+    "pointId": 29
+  },
+  {
+    "shopId": 52,
+    "dayId": 5,
+    "pointId": 29
+  },
+  {
+    "shopId": 52,
+    "dayId": 6,
+    "pointId": 29
+  },
+  {
+    "shopId": 52,
+    "dayId": 0,
+    "pointId": 29
+  },
+  {
+    "shopId": 53,
+    "dayId": 1,
+    "pointId": 3
+  },
+  {
+    "shopId": 53,
+    "dayId": 2,
+    "pointId": 3
+  },
+  {
+    "shopId": 53,
+    "dayId": 3,
+    "pointId": 3
+  },
+  {
+    "shopId": 53,
+    "dayId": 4,
+    "pointId": 3
+  },
+  {
+    "shopId": 53,
+    "dayId": 5,
+    "pointId": 3
+  },
+  {
+    "shopId": 53,
+    "dayId": 6,
+    "pointId": 3
+  },
+  {
+    "shopId": 53,
+    "dayId": 0,
+    "pointId": 3
+  },
+  {
+    "shopId": 54,
+    "dayId": 1,
+    "pointId": 3
+  },
+  {
+    "shopId": 54,
+    "dayId": 2,
+    "pointId": 3
+  },
+  {
+    "shopId": 54,
+    "dayId": 3,
+    "pointId": 3
+  },
+  {
+    "shopId": 54,
+    "dayId": 4,
+    "pointId": 3
+  },
+  {
+    "shopId": 54,
+    "dayId": 5,
+    "pointId": 3
+  },
+  {
+    "shopId": 54,
+    "dayId": 6,
+    "pointId": 3
+  },
+  {
+    "shopId": 54,
+    "dayId": 0,
+    "pointId": 3
+  },
+  {
+    "shopId": 55,
+    "dayId": 1,
+    "pointId": 3
+  },
+  {
+    "shopId": 55,
+    "dayId": 2,
+    "pointId": 3
+  },
+  {
+    "shopId": 55,
+    "dayId": 3,
+    "pointId": 3
+  },
+  {
+    "shopId": 55,
+    "dayId": 4,
+    "pointId": 3
+  },
+  {
+    "shopId": 55,
+    "dayId": 5,
+    "pointId": 3
+  },
+  {
+    "shopId": 55,
+    "dayId": 6,
+    "pointId": 3
+  },
+  {
+    "shopId": 55,
+    "dayId": 0,
+    "pointId": 3
+  },
+  {
+    "shopId": 56,
+    "dayId": 1,
+    "pointId": 4
+  },
+  {
+    "shopId": 56,
+    "dayId": 2,
+    "pointId": 4
+  },
+  {
+    "shopId": 56,
+    "dayId": 3,
+    "pointId": 4
+  },
+  {
+    "shopId": 56,
+    "dayId": 4,
+    "pointId": 4
+  },
+  {
+    "shopId": 56,
+    "dayId": 5,
+    "pointId": 4
+  },
+  {
+    "shopId": 56,
+    "dayId": 6,
+    "pointId": 4
+  },
+  {
+    "shopId": 56,
+    "dayId": 0,
+    "pointId": 4
+  },
+  {
+    "shopId": 57,
+    "dayId": 1,
+    "pointId": 4
+  },
+  {
+    "shopId": 57,
+    "dayId": 2,
+    "pointId": 4
+  },
+  {
+    "shopId": 57,
+    "dayId": 3,
+    "pointId": 4
+  },
+  {
+    "shopId": 57,
+    "dayId": 4,
+    "pointId": 4
+  },
+  {
+    "shopId": 57,
+    "dayId": 5,
+    "pointId": 4
+  },
+  {
+    "shopId": 57,
+    "dayId": 6,
+    "pointId": 4
+  },
+  {
+    "shopId": 57,
+    "dayId": 0,
+    "pointId": 4
+  },
+  {
+    "shopId": 58,
+    "dayId": 1,
+    "pointId": 4
+  },
+  {
+    "shopId": 58,
+    "dayId": 2,
+    "pointId": 4
+  },
+  {
+    "shopId": 58,
+    "dayId": 3,
+    "pointId": 4
+  },
+  {
+    "shopId": 58,
+    "dayId": 4,
+    "pointId": 4
+  },
+  {
+    "shopId": 58,
+    "dayId": 5,
+    "pointId": 4
+  },
+  {
+    "shopId": 58,
+    "dayId": 6,
+    "pointId": 4
+  },
+  {
+    "shopId": 58,
+    "dayId": 0,
+    "pointId": 4
+  },
+  {
+    "shopId": 59,
+    "dayId": 1,
+    "pointId": 4
+  },
+  {
+    "shopId": 59,
+    "dayId": 2,
+    "pointId": 4
+  },
+  {
+    "shopId": 59,
+    "dayId": 3,
+    "pointId": 4
+  },
+  {
+    "shopId": 59,
+    "dayId": 4,
+    "pointId": 4
+  },
+  {
+    "shopId": 59,
+    "dayId": 5,
+    "pointId": 4
+  },
+  {
+    "shopId": 59,
+    "dayId": 6,
+    "pointId": 4
+  },
+  {
+    "shopId": 59,
+    "dayId": 0,
+    "pointId": 4
+  },
+  {
+    "shopId": 60,
+    "dayId": 1,
+    "pointId": 5
+  },
+  {
+    "shopId": 60,
+    "dayId": 2,
+    "pointId": 5
+  },
+  {
+    "shopId": 60,
+    "dayId": 3,
+    "pointId": 5
+  },
+  {
+    "shopId": 60,
+    "dayId": 4,
+    "pointId": 5
+  },
+  {
+    "shopId": 60,
+    "dayId": 5,
+    "pointId": 5
+  },
+  {
+    "shopId": 60,
+    "dayId": 6,
+    "pointId": 5
+  },
+  {
+    "shopId": 60,
+    "dayId": 0,
+    "pointId": 5
+  },
+  {
+    "shopId": 61,
+    "dayId": 1,
+    "pointId": 5
+  },
+  {
+    "shopId": 61,
+    "dayId": 2,
+    "pointId": 5
+  },
+  {
+    "shopId": 61,
+    "dayId": 3,
+    "pointId": 5
+  },
+  {
+    "shopId": 61,
+    "dayId": 4,
+    "pointId": 5
+  },
+  {
+    "shopId": 61,
+    "dayId": 5,
+    "pointId": 5
+  },
+  {
+    "shopId": 61,
+    "dayId": 6,
+    "pointId": 5
+  },
+  {
+    "shopId": 61,
+    "dayId": 0,
+    "pointId": 5
+  },
+  {
+    "shopId": 62,
+    "dayId": 1,
+    "pointId": 6
+  },
+  {
+    "shopId": 62,
+    "dayId": 2,
+    "pointId": 6
+  },
+  {
+    "shopId": 62,
+    "dayId": 3,
+    "pointId": 6
+  },
+  {
+    "shopId": 62,
+    "dayId": 4,
+    "pointId": 6
+  },
+  {
+    "shopId": 62,
+    "dayId": 5,
+    "pointId": 6
+  },
+  {
+    "shopId": 62,
+    "dayId": 6,
+    "pointId": 6
+  },
+  {
+    "shopId": 62,
+    "dayId": 0,
+    "pointId": 6
+  },
+  {
+    "shopId": 63,
+    "dayId": 1,
+    "pointId": 6
+  },
+  {
+    "shopId": 63,
+    "dayId": 2,
+    "pointId": 6
+  },
+  {
+    "shopId": 63,
+    "dayId": 3,
+    "pointId": 6
+  },
+  {
+    "shopId": 63,
+    "dayId": 4,
+    "pointId": 6
+  },
+  {
+    "shopId": 63,
+    "dayId": 5,
+    "pointId": 6
+  },
+  {
+    "shopId": 63,
+    "dayId": 6,
+    "pointId": 6
+  },
+  {
+    "shopId": 63,
+    "dayId": 0,
+    "pointId": 6
+  },
+  {
+    "shopId": 64,
+    "dayId": 1,
+    "pointId": 6
+  },
+  {
+    "shopId": 64,
+    "dayId": 2,
+    "pointId": 6
+  },
+  {
+    "shopId": 64,
+    "dayId": 3,
+    "pointId": 6
+  },
+  {
+    "shopId": 64,
+    "dayId": 4,
+    "pointId": 6
+  },
+  {
+    "shopId": 64,
+    "dayId": 5,
+    "pointId": 6
+  },
+  {
+    "shopId": 64,
+    "dayId": 6,
+    "pointId": 6
+  },
+  {
+    "shopId": 64,
+    "dayId": 0,
+    "pointId": 6
+  },
+  {
+    "shopId": 65,
+    "dayId": 1,
+    "pointId": 6
+  },
+  {
+    "shopId": 65,
+    "dayId": 2,
+    "pointId": 6
+  },
+  {
+    "shopId": 65,
+    "dayId": 3,
+    "pointId": 6
+  },
+  {
+    "shopId": 65,
+    "dayId": 4,
+    "pointId": 6
+  },
+  {
+    "shopId": 65,
+    "dayId": 5,
+    "pointId": 6
+  },
+  {
+    "shopId": 65,
+    "dayId": 6,
+    "pointId": 6
+  },
+  {
+    "shopId": 65,
+    "dayId": 0,
+    "pointId": 6
+  },
+  {
+    "shopId": 66,
+    "dayId": 1,
+    "pointId": 6
+  },
+  {
+    "shopId": 66,
+    "dayId": 2,
+    "pointId": 6
+  },
+  {
+    "shopId": 66,
+    "dayId": 3,
+    "pointId": 6
+  },
+  {
+    "shopId": 66,
+    "dayId": 4,
+    "pointId": 6
+  },
+  {
+    "shopId": 66,
+    "dayId": 5,
+    "pointId": 6
+  },
+  {
+    "shopId": 66,
+    "dayId": 6,
+    "pointId": 6
+  },
+  {
+    "shopId": 66,
+    "dayId": 0,
+    "pointId": 6
+  },
+  {
+    "shopId": 67,
+    "dayId": 1,
+    "pointId": 7
+  },
+  {
+    "shopId": 67,
+    "dayId": 2,
+    "pointId": 7
+  },
+  {
+    "shopId": 67,
+    "dayId": 3,
+    "pointId": 7
+  },
+  {
+    "shopId": 67,
+    "dayId": 4,
+    "pointId": 7
+  },
+  {
+    "shopId": 67,
+    "dayId": 5,
+    "pointId": 7
+  },
+  {
+    "shopId": 67,
+    "dayId": 6,
+    "pointId": 7
+  },
+  {
+    "shopId": 67,
+    "dayId": 0,
+    "pointId": 7
+  },
+  {
+    "shopId": 68,
+    "dayId": 1,
+    "pointId": 7
+  },
+  {
+    "shopId": 68,
+    "dayId": 2,
+    "pointId": 7
+  },
+  {
+    "shopId": 68,
+    "dayId": 3,
+    "pointId": 7
+  },
+  {
+    "shopId": 68,
+    "dayId": 4,
+    "pointId": 7
+  },
+  {
+    "shopId": 68,
+    "dayId": 5,
+    "pointId": 7
+  },
+  {
+    "shopId": 68,
+    "dayId": 6,
+    "pointId": 7
+  },
+  {
+    "shopId": 68,
+    "dayId": 0,
+    "pointId": 7
+  },
+  {
+    "shopId": 69,
+    "dayId": 1,
+    "pointId": 7
+  },
+  {
+    "shopId": 69,
+    "dayId": 2,
+    "pointId": 7
+  },
+  {
+    "shopId": 69,
+    "dayId": 3,
+    "pointId": 7
+  },
+  {
+    "shopId": 69,
+    "dayId": 4,
+    "pointId": 7
+  },
+  {
+    "shopId": 69,
+    "dayId": 5,
+    "pointId": 7
+  },
+  {
+    "shopId": 69,
+    "dayId": 6,
+    "pointId": 7
+  },
+  {
+    "shopId": 69,
+    "dayId": 0,
+    "pointId": 7
+  },
+  {
+    "shopId": 70,
+    "dayId": 1,
+    "pointId": 7
+  },
+  {
+    "shopId": 70,
+    "dayId": 2,
+    "pointId": 7
+  },
+  {
+    "shopId": 70,
+    "dayId": 3,
+    "pointId": 7
+  },
+  {
+    "shopId": 70,
+    "dayId": 4,
+    "pointId": 7
+  },
+  {
+    "shopId": 70,
+    "dayId": 5,
+    "pointId": 7
+  },
+  {
+    "shopId": 70,
+    "dayId": 6,
+    "pointId": 7
+  },
+  {
+    "shopId": 70,
+    "dayId": 0,
+    "pointId": 7
+  },
+  {
+    "shopId": 71,
+    "dayId": 1,
+    "pointId": 8
+  },
+  {
+    "shopId": 71,
+    "dayId": 2,
+    "pointId": 8
+  },
+  {
+    "shopId": 71,
+    "dayId": 3,
+    "pointId": 8
+  },
+  {
+    "shopId": 71,
+    "dayId": 4,
+    "pointId": 8
+  },
+  {
+    "shopId": 71,
+    "dayId": 5,
+    "pointId": 8
+  },
+  {
+    "shopId": 71,
+    "dayId": 6,
+    "pointId": 8
+  },
+  {
+    "shopId": 71,
+    "dayId": 0,
+    "pointId": 8
+  },
+  {
+    "shopId": 72,
+    "dayId": 1,
+    "pointId": 8
+  },
+  {
+    "shopId": 72,
+    "dayId": 2,
+    "pointId": 8
+  },
+  {
+    "shopId": 72,
+    "dayId": 3,
+    "pointId": 8
+  },
+  {
+    "shopId": 72,
+    "dayId": 4,
+    "pointId": 8
+  },
+  {
+    "shopId": 72,
+    "dayId": 5,
+    "pointId": 8
+  },
+  {
+    "shopId": 72,
+    "dayId": 6,
+    "pointId": 8
+  },
+  {
+    "shopId": 72,
+    "dayId": 0,
+    "pointId": 8
+  },
+  {
+    "shopId": 73,
+    "dayId": 1,
+    "pointId": 8
+  },
+  {
+    "shopId": 73,
+    "dayId": 2,
+    "pointId": 8
+  },
+  {
+    "shopId": 73,
+    "dayId": 3,
+    "pointId": 8
+  },
+  {
+    "shopId": 73,
+    "dayId": 4,
+    "pointId": 8
+  },
+  {
+    "shopId": 73,
+    "dayId": 5,
+    "pointId": 8
+  },
+  {
+    "shopId": 73,
+    "dayId": 6,
+    "pointId": 8
+  },
+  {
+    "shopId": 73,
+    "dayId": 0,
+    "pointId": 8
+  },
+  {
+    "shopId": 74,
+    "dayId": 1,
+    "pointId": 8
+  },
+  {
+    "shopId": 74,
+    "dayId": 2,
+    "pointId": 8
+  },
+  {
+    "shopId": 74,
+    "dayId": 3,
+    "pointId": 8
+  },
+  {
+    "shopId": 74,
+    "dayId": 4,
+    "pointId": 8
+  },
+  {
+    "shopId": 74,
+    "dayId": 5,
+    "pointId": 8
+  },
+  {
+    "shopId": 74,
+    "dayId": 6,
+    "pointId": 8
+  },
+  {
+    "shopId": 74,
+    "dayId": 0,
+    "pointId": 8
+  },
+  {
+    "shopId": 75,
+    "dayId": 1,
+    "pointId": 9
+  },
+  {
+    "shopId": 75,
+    "dayId": 2,
+    "pointId": 9
+  },
+  {
+    "shopId": 75,
+    "dayId": 3,
+    "pointId": 9
+  },
+  {
+    "shopId": 75,
+    "dayId": 4,
+    "pointId": 9
+  },
+  {
+    "shopId": 75,
+    "dayId": 5,
+    "pointId": 9
+  },
+  {
+    "shopId": 75,
+    "dayId": 6,
+    "pointId": 9
+  },
+  {
+    "shopId": 75,
+    "dayId": 0,
+    "pointId": 9
+  },
+  {
+    "shopId": 76,
+    "dayId": 1,
+    "pointId": 9
+  },
+  {
+    "shopId": 76,
+    "dayId": 2,
+    "pointId": 9
+  },
+  {
+    "shopId": 76,
+    "dayId": 3,
+    "pointId": 9
+  },
+  {
+    "shopId": 76,
+    "dayId": 4,
+    "pointId": 9
+  },
+  {
+    "shopId": 76,
+    "dayId": 5,
+    "pointId": 9
+  },
+  {
+    "shopId": 76,
+    "dayId": 6,
+    "pointId": 9
+  },
+  {
+    "shopId": 76,
+    "dayId": 0,
+    "pointId": 9
+  },
+  {
+    "shopId": 77,
+    "dayId": 1,
+    "pointId": 9
+  },
+  {
+    "shopId": 77,
+    "dayId": 2,
+    "pointId": 9
+  },
+  {
+    "shopId": 77,
+    "dayId": 3,
+    "pointId": 9
+  },
+  {
+    "shopId": 77,
+    "dayId": 4,
+    "pointId": 9
+  },
+  {
+    "shopId": 77,
+    "dayId": 5,
+    "pointId": 9
+  },
+  {
+    "shopId": 77,
+    "dayId": 6,
+    "pointId": 9
+  },
+  {
+    "shopId": 77,
+    "dayId": 0,
+    "pointId": 9
+  },
+  {
+    "shopId": 78,
+    "dayId": 1,
+    "pointId": 21
+  },
+  {
+    "shopId": 78,
+    "dayId": 2,
+    "pointId": 21
+  },
+  {
+    "shopId": 78,
+    "dayId": 3,
+    "pointId": 21
+  },
+  {
+    "shopId": 78,
+    "dayId": 4,
+    "pointId": 21
+  },
+  {
+    "shopId": 78,
+    "dayId": 5,
+    "pointId": 21
+  },
+  {
+    "shopId": 78,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 78,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 79,
+    "dayId": 1,
+    "pointId": 2
+  },
+  {
+    "shopId": 79,
+    "dayId": 2,
+    "pointId": 2
+  },
+  {
+    "shopId": 79,
+    "dayId": 3,
+    "pointId": 2
+  },
+  {
+    "shopId": 79,
+    "dayId": 4,
+    "pointId": 2
+  },
+  {
+    "shopId": 79,
+    "dayId": 5,
+    "pointId": 2
+  },
+  {
+    "shopId": 79,
+    "dayId": 6,
+    "pointId": 2
+  },
+  {
+    "shopId": 79,
+    "dayId": 0,
+    "pointId": 2
+  },
+  {
+    "shopId": 80,
+    "dayId": 1,
+    "pointId": 2
+  },
+  {
+    "shopId": 80,
+    "dayId": 2,
+    "pointId": 2
+  },
+  {
+    "shopId": 80,
+    "dayId": 3,
+    "pointId": 2
+  },
+  {
+    "shopId": 80,
+    "dayId": 4,
+    "pointId": 2
+  },
+  {
+    "shopId": 80,
+    "dayId": 5,
+    "pointId": 2
+  },
+  {
+    "shopId": 80,
+    "dayId": 6,
+    "pointId": 2
+  },
+  {
+    "shopId": 80,
+    "dayId": 0,
+    "pointId": 2
+  },
+  {
+    "shopId": 81,
+    "dayId": 1,
+    "pointId": 12
+  },
+  {
+    "shopId": 81,
+    "dayId": 2,
+    "pointId": 12
+  },
+  {
+    "shopId": 81,
+    "dayId": 3,
+    "pointId": 12
+  },
+  {
+    "shopId": 81,
+    "dayId": 4,
+    "pointId": 12
+  },
+  {
+    "shopId": 81,
+    "dayId": 5,
+    "pointId": 12
+  },
+  {
+    "shopId": 81,
+    "dayId": 6,
+    "pointId": 12
+  },
+  {
+    "shopId": 81,
+    "dayId": 0,
+    "pointId": 12
+  },
+  {
+    "shopId": 82,
+    "dayId": 1,
+    "pointId": 6
+  },
+  {
+    "shopId": 82,
+    "dayId": 2,
+    "pointId": 6
+  },
+  {
+    "shopId": 82,
+    "dayId": 3,
+    "pointId": 6
+  },
+  {
+    "shopId": 82,
+    "dayId": 4,
+    "pointId": 6
+  },
+  {
+    "shopId": 82,
+    "dayId": 5,
+    "pointId": 6
+  },
+  {
+    "shopId": 82,
+    "dayId": 6,
+    "pointId": 6
+  },
+  {
+    "shopId": 82,
+    "dayId": 0,
+    "pointId": 6
+  },
+  {
+    "shopId": 83,
+    "dayId": 1,
+    "pointId": 8
+  },
+  {
+    "shopId": 83,
+    "dayId": 2,
+    "pointId": 8
+  },
+  {
+    "shopId": 83,
+    "dayId": 3,
+    "pointId": 8
+  },
+  {
+    "shopId": 83,
+    "dayId": 4,
+    "pointId": 8
+  },
+  {
+    "shopId": 83,
+    "dayId": 5,
+    "pointId": 8
+  },
+  {
+    "shopId": 83,
+    "dayId": 6,
+    "pointId": 8
+  },
+  {
+    "shopId": 83,
+    "dayId": 0,
+    "pointId": 8
+  },
+  {
+    "shopId": 84,
+    "dayId": 1,
+    "pointId": 3
+  },
+  {
+    "shopId": 84,
+    "dayId": 2,
+    "pointId": 3
+  },
+  {
+    "shopId": 84,
+    "dayId": 3,
+    "pointId": 3
+  },
+  {
+    "shopId": 84,
+    "dayId": 4,
+    "pointId": 3
+  },
+  {
+    "shopId": 84,
+    "dayId": 5,
+    "pointId": 3
+  },
+  {
+    "shopId": 84,
+    "dayId": 6,
+    "pointId": 3
+  },
+  {
+    "shopId": 84,
+    "dayId": 0,
+    "pointId": 3
+  },
+  {
+    "shopId": 85,
+    "dayId": 1,
+    "pointId": 13
+  },
+  {
+    "shopId": 85,
+    "dayId": 2,
+    "pointId": 13
+  },
+  {
+    "shopId": 85,
+    "dayId": 3,
+    "pointId": 13
+  },
+  {
+    "shopId": 85,
+    "dayId": 4,
+    "pointId": 13
+  },
+  {
+    "shopId": 85,
+    "dayId": 5,
+    "pointId": 13
+  },
+  {
+    "shopId": 85,
+    "dayId": 6,
+    "pointId": 13
+  },
+  {
+    "shopId": 85,
+    "dayId": 0,
+    "pointId": 13
+  },
+  {
+    "shopId": 86,
+    "dayId": 1,
+    "pointId": 5
+  },
+  {
+    "shopId": 86,
+    "dayId": 2,
+    "pointId": 5
+  },
+  {
+    "shopId": 86,
+    "dayId": 3,
+    "pointId": 5
+  },
+  {
+    "shopId": 86,
+    "dayId": 4,
+    "pointId": 5
+  },
+  {
+    "shopId": 86,
+    "dayId": 5,
+    "pointId": 5
+  },
+  {
+    "shopId": 86,
+    "dayId": 6,
+    "pointId": 5
+  },
+  {
+    "shopId": 86,
+    "dayId": 0,
+    "pointId": 5
+  },
+  {
+    "shopId": 87,
+    "dayId": 1,
+    "pointId": 26
+  },
+  {
+    "shopId": 87,
+    "dayId": 2,
+    "pointId": 26
+  },
+  {
+    "shopId": 87,
+    "dayId": 3,
+    "pointId": 26
+  },
+  {
+    "shopId": 87,
+    "dayId": 4,
+    "pointId": 26
+  },
+  {
+    "shopId": 87,
+    "dayId": 5,
+    "pointId": 26
+  },
+  {
+    "shopId": 87,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 87,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 88,
+    "dayId": 1,
+    "pointId": 26
+  },
+  {
+    "shopId": 88,
+    "dayId": 2,
+    "pointId": 26
+  },
+  {
+    "shopId": 88,
+    "dayId": 3,
+    "pointId": 26
+  },
+  {
+    "shopId": 88,
+    "dayId": 4,
+    "pointId": 26
+  },
+  {
+    "shopId": 88,
+    "dayId": 5,
+    "pointId": 26
+  },
+  {
+    "shopId": 88,
+    "dayId": 6,
+    "pointId": 26
+  },
+  {
+    "shopId": 88,
+    "dayId": 0,
+    "pointId": 26
+  },
+  {
+    "shopId": 89,
+    "dayId": 1,
+    "pointId": 22
+  },
+  {
+    "shopId": 89,
+    "dayId": 2,
+    "pointId": 22
+  },
+  {
+    "shopId": 89,
+    "dayId": 3,
+    "pointId": 22
+  },
+  {
+    "shopId": 89,
+    "dayId": 4,
+    "pointId": 22
+  },
+  {
+    "shopId": 89,
+    "dayId": 5,
+    "pointId": 22
+  },
+  {
+    "shopId": 89,
+    "dayId": 6,
+    "pointId": 22
+  },
+  {
+    "shopId": 89,
+    "dayId": 0,
+    "pointId": 22
+  },
+  {
+    "shopId": 90,
+    "dayId": 1,
+    "pointId": 16
+  },
+  {
+    "shopId": 90,
+    "dayId": 2,
+    "pointId": 16
+  },
+  {
+    "shopId": 90,
+    "dayId": 3,
+    "pointId": 16
+  },
+  {
+    "shopId": 90,
+    "dayId": 4,
+    "pointId": 16
+  },
+  {
+    "shopId": 90,
+    "dayId": 5,
+    "pointId": 16
+  },
+  {
+    "shopId": 90,
+    "dayId": 6,
+    "pointId": 16
+  },
+  {
+    "shopId": 90,
+    "dayId": 0,
+    "pointId": 16
+  },
+  {
+    "shopId": 91,
+    "dayId": 1,
+    "pointId": 2
+  },
+  {
+    "shopId": 91,
+    "dayId": 2,
+    "pointId": 2
+  },
+  {
+    "shopId": 91,
+    "dayId": 3,
+    "pointId": 2
+  },
+  {
+    "shopId": 91,
+    "dayId": 4,
+    "pointId": 2
+  },
+  {
+    "shopId": 91,
+    "dayId": 5,
+    "pointId": 2
+  },
+  {
+    "shopId": 91,
+    "dayId": 6,
+    "pointId": 2
+  },
+  {
+    "shopId": 91,
+    "dayId": 0,
+    "pointId": 2
+  }
+]

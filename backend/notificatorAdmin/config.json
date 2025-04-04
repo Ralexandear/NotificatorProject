@@ -1,0 +1,11 @@
+{
+  "tdjson_path": "/Users/ralexandear/td/build/libtdjson.dylib",
+  "delivery_time": 150,
+  "admin_ids": [
+    1479922579,
+    843444736
+  ],
+  "target_group_id": -4601799654,
+  "test_group_id": -4601799654,
+  "use_test": false
+}
