@@ -10,9 +10,11 @@
     "@types/node": "^22.13.11",
     "@types/pg": "^8.11.11",
     "@types/sequelize": "^4.28.20",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "sequelize-mock": "^0.10.2"
   },
   "scripts": {
-    "dev": "nodemon --watch src "
+    "dev": "nodemon --watch src ",
+    "start": "node dist/index.js"
   }
 }

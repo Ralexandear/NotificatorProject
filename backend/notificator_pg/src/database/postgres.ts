@@ -8,13 +8,15 @@ if (POSTGRES_DB === undefined || POSTGRES_USER === undefined || POSTGRES_PASSWOR
   throw new FatalError('Unable to connect to POSTGRES, at least one of required parameters is missing!');
 }
 
+
+
 export const postgres = new Sequelize(
   POSTGRES_DB,
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   {
     dialect: 'postgres',
-    host: 'localhost',
+    host: process.env.DATABASE_URL || 'localhost',
     port: +DB_PORT
   }
 )

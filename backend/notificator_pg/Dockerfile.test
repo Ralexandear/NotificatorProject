@@ -1,0 +1,15 @@
+# Используем Node.js
+FROM node:18
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm install --omit=dev
+
+COPY dist/ ./dist/
+COPY .env ./
+
+ENV NODE_ENV=development
+ENV DATABASE_URL=host.docker.internal 
+
+RUN npm start
