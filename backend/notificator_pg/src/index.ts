@@ -5,18 +5,12 @@ import { LabomatixOrderEventHandler } from './handlers/LabomatixOrderEventHandle
 import { KafkaPostgresResponseAttributes, KafkaResponseStatus, KafkaResponseTopicNameType } from './shared/interfaces/KafkaResponseAttributes';
 import { ValidationError } from './shared/errors/ValidationError';
 import { ShopEventHandlder } from './handlers/ShopEventHandler';
+import { databaseInitializationPromise } from './database';
+import { FatalError } from './shared/errors/FatalError';
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-const client = new kafka.KafkaClient({ kafkaHost: 'localhost:9092' });
 
-const consumer = new kafka.Consumer(
-  client,
-  [{ topic: 'pg-labomatix-order-events', partition: 0 }, {topic: 'pg-point-events'}, {topic: 'pg-shop-events'}],
-  { autoCommit: true }
-);
-
-export const producer = new kafka.Producer(client)
 
 class KafkaResponse implements KafkaPostgresResponseAttributes {
   //Класс может реализовать только тип объекта или пересечение типов объектов со статическими известными членами
@@ -88,57 +82,133 @@ class KafkaResponse implements KafkaPostgresResponseAttributes {
   }
 }
 
+const topics = [
+  'notificator-db-labomatix-order-requests',
+  'notificator-db-point-requests',
+  'notificator-db-shop-requests',
+  'notificator-db-user-requests'
+] as KafkaRequestTopicNameType[];
 
+const client = new kafka.KafkaClient({ 
+  kafkaHost: 'localhost:9092',
+  reconnectOnIdle: true,
+  
+});
+
+client.connect()
+
+const consumer = new kafka.Consumer(
+  client,
+  [],
+  { 
+    autoCommit: true,
+  }
+);
+
+export const producer = new kafka.Producer(client);
+
+let retryCount = 0;
+const maxRetries = 3;
+
+
+const setupConsumer = () => {
+  consumer.addTopics(topics, (err, result) => {
+    if (err) {
+      console.error('Error adding topics:', err);
+      if (retryCount < maxRetries) {
+        retryCount++;
+        console.log(`Retrying (${retryCount}/${maxRetries})...`);
+        setTimeout(setupConsumer, 2000);
+      } else {
+        throw new FatalError('Failed to add topics after multiple attempts: ' + err);
+      }
+    } else {
+      console.log('Topics successfully added:', result);
+    }
+  });
+};
+
+producer.on('ready', async () => {
+  console.log('Producer is ready');
+  
+  producer.createTopics(topics, (err, result) => {
+    if (err) {
+      throw new FatalError('Error creating topics:' + err);
+    } else {
+      console.log('Topics successfully created:', result);
+      // Start consumer setup after topics are created
+      setTimeout(setupConsumer, 2000);
+    }
+  });
+});
 
 
 consumer.on('message', async (message) => {
-  const stringRequest = message.value.toString()
-  Logger.info('Recieved request:', stringRequest);
-
-  const topic: KafkaRequestTopicNameType = message.topic as KafkaRequestTopicNameType //if not we don't care
-  const data = JSON.parse(stringRequest);
-
-  let handler: (event: KafkaPostgresRequestAttributes<KafkaRequestTopicNameType, KafkaActionType>) => Promise<any>;
-  let responseTopic: KafkaResponseTopicNameType
-  // if (topic === 'notificator-db-user-requests') {
-  //   handler = UserEventHandler
-  //   responseTopic = 'notificator-db-user-response'
-  // }
-  if (topic === 'notificator-db-shop-requests') {
-    handler = ShopEventHandlder
-    responseTopic = 'notificator-db-shop-response'
-  }
-  // else if (topic === 'pg-point-events') handler = PointEventHandler
-  else if (topic === 'notificator-db-labomatix-order-requests') {
-    handler = LabomatixOrderEventHandler
-    responseTopic = 'notificator-db-labomatix-order-response'
-  }
-  else {
-    Logger.error('Unknown topic:', topic);
-    return;
-  }
-
-  Logger.info('Handler:', handler.name);
-  const response = new KafkaResponse(responseTopic, data.request_id, data.action, data.data);
-
+  await databaseInitializationPromise;
 
   try {
-    response.data = await handler(data);
-    response.status = response.data ? 'OK' : 'NOT_FOUND';
-  }
-  catch (error) {
-    if (error instanceof ValidationError) {
-      response.status = 'INVALID_DATA';
-      response.data = error.message;
-    } else {
-      response.status = 'ERROR';
-      response.data = error;
+    const stringRequest = message.value.toString()
+    Logger.info('Recieved request:', stringRequest);
+
+    const topic: KafkaRequestTopicNameType = message.topic as KafkaRequestTopicNameType //if not we don't care
+    const data = JSON.parse(stringRequest);
+
+    let handler: (event: KafkaPostgresRequestAttributes<KafkaRequestTopicNameType, KafkaActionType>) => Promise<any>;
+    let responseTopic: KafkaResponseTopicNameType
+    // if (topic === 'notificator-db-user-requests') {
+    //   handler = UserEventHandler
+    //   responseTopic = 'notificator-db-user-response'
+    // }
+    if (topic === 'notificator-db-shop-requests') {
+      handler = ShopEventHandlder
+      responseTopic = 'notificator-db-shop-response'
+    }
+    // else if (topic === 'pg-point-events') handler = PointEventHandler
+    else if (topic === 'notificator-db-labomatix-order-requests') {
+      handler = LabomatixOrderEventHandler
+      responseTopic = 'notificator-db-labomatix-order-response'
+    }
+    else {
+      Logger.error('Unknown topic:', topic);
+      return;
     }
 
-    Logger.error('FATAL ERROR:', error, error instanceof Error ? error.stack : '');
+    Logger.info('Handler:', handler.name);
+    const response = new KafkaResponse(responseTopic, data.request_id, data.action, data.data);
+
+
+    try {
+      response.data = await handler(data);
+      response.status = response.data ? 'OK' : 'NOT_FOUND';
+    }
+    catch (error) {
+      if (error instanceof ValidationError) {
+        response.status = 'INVALID_DATA';
+        response.data = error.message;
+      } else {
+        response.status = 'ERROR';
+        response.data = error;
+      }
+
+      Logger.error('FATAL ERROR:', error, error instanceof Error ? error.stack : '');
+    }
+    finally {
+      response.send()
+    }
+  } catch (error) {
+    Logger.error('Error processing message:', error);
   }
-  finally {
-    response.send()
-  }
-  
+});
+
+
+producer.on('error', (err) => {
+  console.error('Producer error:', err);
+});
+
+consumer.on('error', (err) => {
+  console.error('Consumer error:', err);
+});
+
+client.on('error', (err) => {
+  console.error('Client error:', err);
 });

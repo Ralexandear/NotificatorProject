@@ -52,9 +52,9 @@ LabomatixOrder.init(
       type: DataTypes.BIGINT,
       key: 'packet_number'
     },
-    orderDateTime: {
-      type: DataTypes.DATE,
-    },
+    // orderDateTime: {
+    //   type: DataTypes.DATE,
+    // },
     shopId: {
       type: DataTypes.INTEGER,
     }
