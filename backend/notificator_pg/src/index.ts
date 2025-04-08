@@ -13,7 +13,6 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
 
 
-
 class KafkaResponse implements KafkaPostgresResponseAttributes {
   //Класс может реализовать только тип объекта или пересечение типов объектов со статическими известными членами
   protected _topic: KafkaResponseTopicNameType;
@@ -84,37 +83,45 @@ class KafkaResponse implements KafkaPostgresResponseAttributes {
   }
 }
 
-const topics = [
+const requestTopics = [
   'notificator-db-labomatix-order-requests',
   'notificator-db-point-requests',
   'notificator-db-shop-requests',
-  'notificator-db-user-requests'
+  'notificator-db-user-requests',
 ] as KafkaRequestTopicNameType[];
 
-const client = new kafka.KafkaClient({ 
+const responseTopics = [
+  'notificator-db-labomatix-order-response',
+  'notificator-db-point-response',
+  'notificator-db-shop-response',
+  'notificator-db-user-response'
+]
+
+
+export const kafkaClient = new kafka.KafkaClient({ 
   kafkaHost: 'localhost:9092',
   reconnectOnIdle: true,
   
 });
 
-client.connect()
+kafkaClient.connect()
 
 const consumer = new kafka.Consumer(
-  client,
+  kafkaClient,
   [],
   { 
     autoCommit: true,
   }
 );
 
-export const producer = new kafka.Producer(client);
+export const producer = new kafka.Producer(kafkaClient);
 
 let retryCount = 0;
 const maxRetries = 3;
 
 
 const setupConsumer = () => {
-  consumer.addTopics(topics, (err, result) => {
+  consumer.addTopics(requestTopics, (err, result) => {
     if (err) {
       console.error('Error adding topics:', err);
       if (retryCount < maxRetries) {
@@ -133,7 +140,7 @@ const setupConsumer = () => {
 producer.on('ready', async () => {
   console.log('Producer is ready');
   
-  producer.createTopics(topics, (err, result) => {
+  producer.createTopics([...requestTopics, ...responseTopics], (err, result) => {
     if (err) {
       throw new FatalError('Error creating topics:' + err);
     } else {
@@ -211,6 +218,6 @@ consumer.on('error', (err) => {
   console.error('Consumer error:', err);
 });
 
-client.on('error', (err) => {
+kafkaClient.on('error', (err) => {
   console.error('Client error:', err);
 });
