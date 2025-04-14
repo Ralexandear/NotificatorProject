@@ -6,7 +6,11 @@ import Logger from '../shared/utils/Logger';
 import { LabomatixOrder } from './models/LabomatixOrder';
 import { Shop } from './models/Shop';
 import { LogisticSchema } from './models/LogisticSchema';
-import { IS_PRODUCTION } from '..';
+
+
+export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
+Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
 
 const id = {type: DataTypes.INTEGER, autoIncrement: true, unique: true, primaryKey: true}
 
@@ -37,7 +41,11 @@ LabomatixOrder.init(
       type: DataTypes.BIGINT,
       allowNull: false,
       key: 'message_id',
-      unique: true
+      unique: true,
+      get() {
+        const rawValue = this.getDataValue('messageId');
+        return rawValue !== null ? Number(rawValue) : null;
+      }
     },
     status: {
       type: DataTypes.STRING(20),
@@ -50,7 +58,11 @@ LabomatixOrder.init(
     },
     packetNumber: {
       type: DataTypes.BIGINT,
-      key: 'packet_number'
+      key: 'packet_number',
+      get() {
+        const rawValue = this.getDataValue('packetNumber');
+        return rawValue !== null ? Number(rawValue) : null;
+      }
     },
     // orderDateTime: {
     //   type: DataTypes.DATE,

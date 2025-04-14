@@ -8,8 +8,7 @@ import { ShopEventHandlder } from './handlers/ShopEventHandler';
 import { databaseInitializationPromise } from './database';
 import { FatalError } from './shared/errors/FatalError';
 
-export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
 
 
