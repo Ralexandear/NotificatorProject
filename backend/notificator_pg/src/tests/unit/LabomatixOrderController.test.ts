@@ -3,8 +3,17 @@ import { databaseInitializationPromise } from "../../database"
 import LabomatixOrderController from "../../database/controllers/LabomatixOrderController";
 import { LabomatixOrder } from "../../database/models/LabomatixOrder";
 import { LabomatixOrderCreationAttributes } from "../../shared/interfaces/database/LabomatixOrderAttributes";
+import Logger from "../../shared/utils/Logger";
 
 describe('Labomatix order controller test', () => {
+
+  beforeAll(() => {
+    jest.spyOn(Logger, 'log').mockImplementation(() => {});
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+    jest.spyOn(Logger, 'info').mockImplementation(() => {});
+    jest.spyOn(Logger, 'warn').mockImplementation(() => {});
+    jest.spyOn(Logger, 'error').mockImplementation(() => {});
+  });
 
   let testData = {
     messageId: 12345677,

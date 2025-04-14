@@ -7,6 +7,7 @@ import { ValidationError } from './shared/errors/ValidationError';
 import { ShopEventHandlder } from './handlers/ShopEventHandler';
 import { databaseInitializationPromise } from './database';
 import { FatalError } from './shared/errors/FatalError';
+import PointController from './database/controllers/PointContoller';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
@@ -152,7 +153,20 @@ producer.on('ready', async () => {
 
 
 consumer.on('message', async (message) => {
-  await databaseInitializationPromise;
+  await databaseInitializationPromise
+    .then(async () => {
+      const points = await PointController.findAll({});
+      if (points?.length) return
+      
+      Logger.warn("Points list is missing in database, building default list");
+      
+      [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24, 25, 26, 27, 28, 29
+      ]
+      .map(point => ({name: 'К' + point}))
+    })
 
   try {
     const stringRequest = message.value.toString()
