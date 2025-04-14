@@ -1,15 +1,22 @@
-# Используем Node.js
-FROM node:18
+# Используем легковесный образ Node.js
+FROM node:18-alpine
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
 
+# Копируем только необходимые файлы для установки зависимостей
 COPY package.json package-lock.json ./
-RUN npm install --omit=dev
 
+# Устанавливаем зависимости без dev и очищаем кеш
+RUN npm install && npm cache clean --force
+
+# Копируем только скомпилированные файлы
 COPY dist/ ./dist/
 COPY .env ./
 
+# Устанавливаем переменные окружения
 ENV NODE_ENV=development
 ENV DATABASE_URL=host.docker.internal 
 
-RUN npm start
+# Запускаем приложение
+CMD ["node", "dist/index.js"]

@@ -176,6 +176,8 @@ consumer.on('message', async (message) => {
     else if (topic === 'notificator-db-labomatix-order-requests') {
       handler = LabomatixOrderEventHandler
       responseTopic = 'notificator-db-labomatix-order-response'
+
+      
     }
     else {
       Logger.error('Unknown topic:', topic);
