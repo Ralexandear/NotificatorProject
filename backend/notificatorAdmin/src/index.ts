@@ -1,17 +1,20 @@
 import './configurations'
+import kafka from 'kafka-node';
 import { IS_PRODUCTION } from './constants';
-import Logger from "./Logger";
-// import './classes/UserBot'
 import { savebotUpdateToMongo, saveUserbotUpdateToMongo } from './database/mongo';
 import './telegram/TelegramBot';
 import { UserBot } from './telegram/UserBot';
 import { AdminBot } from './telegram/TelegramBot';
 import fs from 'fs';
 import NewMessageHandler from './handlers/NewMessageHandler';
-import { databaseInitializationPromise } from './database';
-import { FatalError } from './errors/FatalError';
-import { PointSequelizeModel } from './database/models/Point';
 import { newBotMessageHandler } from './handlers/NewBotMessageHandler';
+import { FatalError } from './shared/errors/FatalError';
+import Logger from './shared/utils/Logger';
+import { KafkaRequestTopicNameType } from './shared/interfaces/KafkaRequestAttributes';
+
+if (! IS_PRODUCTION) {
+  Logger.useDebug();
+}
 
 // Создаём потоки для перенаправления стандартного вывода и ошибок
 const logFile = fs.createWriteStream('./logs/output.log', { flags: 'a' });
@@ -37,30 +40,76 @@ process.stdout.write = logStream.write.bind(logStream);
 process.stderr.write = errorStream.write.bind(errorStream);
 
 
+//KAFKA
+const requestTopics = [
+  'notificator-db-labomatix-order-requests',
+  'notificator-db-point-requests',
+  'notificator-db-shop-requests',
+  'notificator-db-user-requests',
+] as KafkaRequestTopicNameType[];
 
-if (! IS_PRODUCTION) {
-  Logger.useDebug();
-}
+const responseTopics = [
+  'notificator-db-labomatix-order-response',
+  'notificator-db-point-response',
+  'notificator-db-shop-response',
+  'notificator-db-user-response'
+]
+
+export const kafkaClient = new kafka.KafkaClient({ 
+  kafkaHost: 'localhost:9092',
+  reconnectOnIdle: true,
+});
+
+const consumer = new kafka.Consumer(
+  kafkaClient,
+  [],
+  { 
+    autoCommit: true,
+  }
+);
+
+export const producer = new kafka.Producer(kafkaClient);
+
+let retryCount = 0;
+const maxRetries = 3;
+
+const setupConsumer = () => {
+  consumer.addTopics(requestTopics, (err, result) => {
+    if (err) {
+      console.error('Error adding topics:', err);
+      if (retryCount < maxRetries) {
+        retryCount++;
+        console.log(`Retrying (${retryCount}/${maxRetries})...`);
+        setTimeout(setupConsumer, 2000);
+      } else {
+        throw new FatalError('Failed to add topics after multiple attempts: ' + err);
+      }
+    } else {
+      console.log('Topics successfully added:', result);
+    }
+  });
+};
+
+producer.on('ready', async () => {
+  console.log('Producer is ready');
+  
+  producer.createTopics([...requestTopics, ...responseTopics], (err, result) => {
+    if (err) {
+      throw new FatalError('Error creating topics:' + err);
+    } else {
+      console.log('Topics successfully created:', result);
+      // Start consumer setup after topics are created
+      setTimeout(setupConsumer, 2000);
+    }
+  });
+});
+
+
+
 
 
 // Основной процесс
 export const initializationPromise = (async () => {
-  await databaseInitializationPromise
-    .then(async () => {
-      const points = await PointSequelizeModel.findAll();
-      if (points.length) return
-      
-      Logger.warn("Points list is missing in database, building default list");
-      const pointsList = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29
-      ]
-      .map(point => ({name: 'К' + point}))
-
-      return PointSequelizeModel.bulkCreate(pointsList);
-    })
-  
   await AdminBot.isReady();
   await UserBot.isReady();
 })();

@@ -135,3 +135,18 @@ export const databaseInitializationPromise = (async () => {
 
   Logger.log('Database initialized')
 })()
+.then(async () => {
+  const points = await Point.findAll();
+  if (points?.length) return
+  
+  Logger.warn("Points list is missing in database, building default list");
+  
+  const pointList = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23, 24, 25, 26, 27, 28, 29
+  ]
+  .map(point => ({name: 'К' + point}));
+  
+  await Point.bulkCreate(pointList)
+})

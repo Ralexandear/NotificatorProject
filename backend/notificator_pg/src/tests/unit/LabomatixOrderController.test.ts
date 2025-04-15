@@ -30,8 +30,6 @@ describe('Labomatix order controller test', () => {
 
   it('Should create an order', async () => {
     const order = await LabomatixOrderController.create(testData)
-    console.log(order.toJSON())
-    console.log(order)
     expect(order.id).toBeDefined();
     expect(order.messageId).toBe(testData.messageId);
     expect(order.packetNumber).toBe(testData.packetNumber);
@@ -41,7 +39,6 @@ describe('Labomatix order controller test', () => {
 
   it('Should find or Create an order', async () => {
     let [order, isNew] = await LabomatixOrderController.findOrCreate(testData)
-    console.log(order.toJSON())
     expect(order.id).toBeDefined();
     expect(order.messageId).toBe(testData.messageId);
     expect(order.packetNumber).toBe(testData.packetNumber);

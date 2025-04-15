@@ -1,12 +1,13 @@
 {
   "dependencies": {
+    "amqplib": "^0.10.7",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "kafka-node": "^5.0.0",
     "pg": "^8.14.1",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.7",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.11",
     "@types/pg": "^8.11.11",
