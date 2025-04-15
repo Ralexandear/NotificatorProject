@@ -1,5 +1,5 @@
 import './configurations'
-import kafka from 'kafka-node';
+import amqp from 'amqplib';
 import { IS_PRODUCTION } from './constants';
 import { savebotUpdateToMongo, saveUserbotUpdateToMongo } from './database/mongo';
 import './telegram/TelegramBot';
