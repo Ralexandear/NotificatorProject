@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
-import Logger from "../Logger";
-import { FatalError } from "../errors/FatalError";
+import Logger from "../shared/utils/Logger";
+import { FatalError } from "../shared/errors/FatalError";
 
 // URL подключения
 const url = "mongodb://localhost:27017";

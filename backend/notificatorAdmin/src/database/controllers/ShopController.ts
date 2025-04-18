@@ -1,6 +1,5 @@
-import { Op } from "sequelize";
-import { Shop, ShopSequelizeModel } from "../models/Shop";
-import Logger from "../../Logger";
+import { RabbitMQRequest } from "../../RabbitMQ";
+import Logger from "../../shared/utils/Logger";
 
 export class ShopController {
   static async findByName(...names: (string| null)[]) {
@@ -13,21 +12,16 @@ export class ShopController {
     
     Logger.log('Searching shop by name', names)
     
-    const model = await ShopSequelizeModel.findOne({
-      where: {
-        [Op.or]: [
-          ...names.map(name => ({ name: { [Op.iLike]: name } })),
-          ...names.map(name => ({ alterName: { [Op.iLike]: name } }))
-        ]
+    const response = await new RabbitMQRequest(
+      'notificator-db-shop-requests',
+      'FIND',
+      {
+        names: names as string[]
       }
-    })
+    ).send()
 
-    if (! model) {
-      Logger.warn(`Shop with name from list"${names}" not found!`)
-      return null
-    }
+    Logger.log('Shop found', JSON.stringify(response))
 
-    Logger.log(`Shop found. Name:`, model.name, 'id', model.id)
-    return new Shop(model)
+    return response
   }
 }

@@ -1,12 +1,11 @@
 import TelegramEntitiesConverter from '../utils/TelegramEntitiesConverter';
-import Logger from '../Logger';
-import { FatalError } from '../errors/FatalError';
-import { $FunctionResultByName, chat, message, ok, setTdlibParameters, updateNewMessage, User } from 'tdlib-types';
-import { API_HASH, API_ID, BOT_TOKEN } from '../constants';
+import { chat, message, ok, updateNewMessage, User } from 'tdlib-types';
+import { BOT_TOKEN } from '../constants';
 import { sleep } from '../utils/sleep';
 import { adminBotClient } from './tdl';
 import { Client } from 'tdl'
-import { databaseInitializationPromise } from '../database';
+import Logger from '../shared/utils/Logger';
+import { FatalError } from '../shared/errors/FatalError';
 
 
 
@@ -24,8 +23,7 @@ export default class TelegramBot {
     Logger.log('Bot login')
 
     const bot = this._instance = new TelegramBot(adminBotClient); // Создаём экземпляр
-    bot.initializationPromise = databaseInitializationPromise
-      .then(() => adminBotClient.loginAsBot(BOT_TOKEN) )
+    bot.initializationPromise = adminBotClient.loginAsBot(BOT_TOKEN)
       .then(async () => {
         Logger.debug('Bot is logged in');
         await bot.getMe();
@@ -35,7 +33,7 @@ export default class TelegramBot {
         Logger.error(error);
         throw new FatalError('Error in loginAsBot');
       })
-  
+
     return bot;
   }
 
@@ -43,7 +41,7 @@ export default class TelegramBot {
   //CONSTRUCTOR
   protected initializationPromise: Promise<void> | null = null;
   protected knownChats: Set<number> = new Set()
-  protected queue: {request: {[key: string]: any}, resolve: Function, reject: Function}[] = []
+  protected queue: { request: { [key: string]: any }, resolve: Function, reject: Function }[] = []
   protected pause: number;
   protected queueProcessing = false
   protected requestsPerSecond = 20
@@ -70,7 +68,7 @@ export default class TelegramBot {
   /** TDLIB METHODS **/
 
   async getMe() {
-    const response = await this.client.invoke({_: 'getMe'})
+    const response = await this.client.invoke({ _: 'getMe' })
     Logger.info(response)
 
     this.me = response
@@ -97,7 +95,7 @@ export default class TelegramBot {
 
   async openChat(chatId: number) {
     Logger.info('Opening chat', chatId)
-    
+
     const response = await this.addToQueue({
       _: 'openChat',
       chat_id: chatId
@@ -123,7 +121,7 @@ export default class TelegramBot {
       chatId = +chatId;
     }
 
-    if (! this.knownChats.has(chatId)) {
+    if (!this.knownChats.has(chatId)) {
       Logger.warn('Chat id is unknown', chatId);
 
       try {
@@ -134,7 +132,7 @@ export default class TelegramBot {
       }
     }
 
-    const {text, entities} = TelegramEntitiesConverter(message)
+    const { text, entities } = TelegramEntitiesConverter(message)
 
     const response = await this.addToQueue({
       _: 'sendMessage',
@@ -148,7 +146,7 @@ export default class TelegramBot {
         },
       }
     }) as unknown as message;
-    
+
     Logger.info('Message sent to chatId', chatId)
     Logger.debug(response)
 
@@ -157,7 +155,7 @@ export default class TelegramBot {
 
 
 
-  
+
   /** CUSTOM METHODS **/
 
   // async getRequestPermission(): Promise<void> {
@@ -168,7 +166,7 @@ export default class TelegramBot {
   //   this.requestsPerSecond++;
   // }
 
-  addToQueue<T>(request: {[key: string]: any}): Promise<T> {
+  addToQueue<T>(request: { [key: string]: any }): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       this.queue.push({ request, resolve, reject });
       Logger.info('Request added to queue:', request);
@@ -199,19 +197,19 @@ export default class TelegramBot {
     this.queueProcessing = false;
   }
 
-  
+
 
   async getResponseFromUser(chatId: number | string, message: string, timeoutInSeconds = 120): Promise<updateNewMessage> {
     await this.isReady(); // Waiting for initialization
 
     const requestMessage = await this.sendMessage(chatId, message);
-  
+
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         this.client.off('update', onUpdate); // Removing listener on timeout
         reject('Timeout exeeded while waiting for users response'); // Возвращаем null, если время ожидания истекло
       }, timeoutInSeconds * 1000);
-  
+
       const onUpdate = (update: any) => {
         if (update._ === 'updateNewMessage' && update.message.chat_id === chatId && update.message.content._ === 'messageText') {
           clearTimeout(timeout); // Очищаем таймер
@@ -219,12 +217,12 @@ export default class TelegramBot {
           resolve(update as updateNewMessage); // Возвращаем обновление
         }
       };
-  
+
       this.client.on('update', onUpdate); // Добавляем слушатель
     });
   }
 }
 
 
-export const AdminBot = TelegramBot.login();
+export const bot = TelegramBot.login();
 

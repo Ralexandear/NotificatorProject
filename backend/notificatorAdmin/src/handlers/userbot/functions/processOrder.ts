@@ -1,27 +1,28 @@
-import { Configuration } from "../../Configuration";
-import { LogisticSchemaController } from "../../database/controllers/LogisticSchemaController";
-import { PointController } from "../../database/controllers/PointContoller";
-import { ShopController } from "../../database/controllers/ShopController";
-import { LabomatixOrder } from "../../database/models/LabomatixOrder";
-import Logger from "../../Logger";
-import { AdminBot } from "../../telegram/TelegramBot";
-import { addTimeToTimeString } from "../../utils/addTimeToTimeString";
+import { Configuration } from "../../../Configuration";
+import { LabomatixOrderController } from "../../../database/controllers/LabomatixOrderController";
+import { LogisticSchemaController } from "../../../database/controllers/LogisticSchemaController";
+import { PointController } from "../../../database/controllers/PointContoller";
+import { ShopController } from "../../../database/controllers/ShopController";
+import { RabbitMQRequest } from "../../../RabbitMQ";
+import { LabomatixOrderAttributes } from "../../../shared/interfaces/database/LabomatixOrderAttributes";
+import Logger from "../../../shared/utils/Logger";
+import { bot } from "../../../telegram/TelegramBot";
+import { addTimeToTimeString } from "../../../utils/addTimeToTimeString";
 
-
-export async function processOrder(order: LabomatixOrder, text: string) {
+export async function processOrder(order: LabomatixOrderAttributes, text: string) {
   Logger.log('Processing order', order.id, 'for message', order.messageId);
   const {packetNumber, place, time} = extractPackageInfo(text);
   const placeFormatted = place?.replace(/дц\s/i, '') || null;
 
   order.packetNumber = packetNumber ? Number(packetNumber) : null;
-  order.status = 'processing'
+  order.status = 'PROCESSING'
   
   try {
     const shop = await ShopController.findByName(place, placeFormatted);
 
     if (! shop) {
       const messageText = 'ДЦ НЕ НАЙДЕН\n\n' + text;
-      await AdminBot.sendMessage(Configuration.target_group_id, messageText);
+      await bot.sendMessage(Configuration.target_group_id, messageText);
       Logger.warn('Shop not found!')
       return
     }
@@ -58,12 +59,12 @@ export async function processOrder(order: LabomatixOrder, text: string) {
       '✚ Лабомат'
     ].join('\n');
 
-    await AdminBot.sendMessage(Configuration.target_group_id, messageText)
-    order.status = 'finished'
+    await bot.sendMessage(Configuration.target_group_id, messageText)
+    order.status = 'FINISHED'
   } catch (error) {
     Logger.error("Error while processing order", error)
   } finally {
-    await order.save();
+    await LabomatixOrderController.update(order);
   }
 }
 

@@ -1,16 +1,19 @@
-import Logger from "../../Logger";
-import { Point, PointSequelizeModel } from "../models/Point";
+import { RabbitMQRequest } from "../../RabbitMQ";
+import Logger from "../../shared/utils/Logger";
 
+const topic = 'notificator-db-point-requests'
 export class PointController {
-  static async getById(pointId: number) {
-    Logger.log('Getting point with id', pointId);
+  static async getById(id: number) {
+    Logger.log('Getting point with id', id);
     
-    const point = await PointSequelizeModel.findByPk(pointId);
+    const response = await new RabbitMQRequest(
+      topic,
+      'GET',
+      { id }
+    ).send();
 
-    if (! point) {
-      Logger.warn('Point with id', pointId, 'not found')
-      return null
-    }
-    return new Point(point);
+    Logger.info('Point with id', id, 'found', JSON.stringify(response))
+
+    return response
   } 
 }

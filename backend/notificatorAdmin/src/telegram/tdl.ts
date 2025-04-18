@@ -1,8 +1,7 @@
 import * as tdl from 'tdl';
 import { API_HASH, API_ID } from '../constants';
-import Logger from '../Logger';
-import { FatalError } from '../errors/FatalError';
 import { Configuration } from '../Configuration';
+import Logger from '../shared/utils/Logger';
 
 tdl.configure({
   tdjson: Configuration.tdjson_path,

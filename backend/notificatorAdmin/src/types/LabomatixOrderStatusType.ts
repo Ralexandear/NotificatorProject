@@ -1,1 +1,0 @@
-export type LabomatixOrderStatusType = 'created' | 'processing' | 'finished' | 'error'

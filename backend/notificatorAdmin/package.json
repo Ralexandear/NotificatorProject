@@ -2,24 +2,19 @@
   "dependencies": {
     "amqplib": "^0.10.7",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "jsdom": "^26.0.0",
-    "kafka-node": "^5.0.0",
     "mongodb": "^6.15.0",
-    "pg": "^8.14.1",
-    "prebuilt-tdlib": "^0.1008040.0",
-    "sequelize": "^6.37.7",
-    "tdl": "^8.0.2"
+    "redis": "^4.7.0",
+    "tdl": "^8.0.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.7",
-    "@types/jsdom": "^21.1.7",
+    "@types/jest": "^29.5.14",
     "@types/mongodb": "^4.0.6",
     "@types/node": "^22.13.11",
-    "@types/pg": "^8.11.11",
-    "@types/sequelize": "^4.28.20",
     "jest": "^29.7.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "ts-jest": "^29.3.2"
   },
   "scripts": {
     "dev": "nodemon --watch src "

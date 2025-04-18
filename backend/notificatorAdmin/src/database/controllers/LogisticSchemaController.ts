@@ -1,5 +1,5 @@
-import Logger from "../../Logger"
-import { LogisticSchema, LogisticSchemaSequelizeModel } from "../models/LogisticSchema"
+import { RabbitMQRequest } from "../../RabbitMQ";
+import Logger from "../../shared/utils/Logger";
 
 export class LogisticSchemaController {
   static async findCurrentCourierId(shopId: number) {
@@ -7,17 +7,17 @@ export class LogisticSchemaController {
 
     Logger.log('Getting schema for shopId', shopId, 'day', day)
 
-    const schema = await LogisticSchemaSequelizeModel.findOne({
-      where: {
-        shopId, day
+    const response = await new RabbitMQRequest(
+      'notificator-db-logistic-requests',
+      'FIND',
+      {
+        shopId,
+        day
       }
-    })
+    ).send()
 
-    if (! schema) {
-      Logger.warn('Schema not found for shopId', shopId, 'day', day);
-      return null
-    }
+    Logger.log('Schema for shopId', shopId, 'day', day, JSON.stringify(response))
 
-    return new LogisticSchema(schema)
+    return response
   }
 }
