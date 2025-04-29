@@ -1,13 +1,14 @@
 import amqp from 'amqplib';
 import Logger from './shared/utils/Logger';
-import { KafkaActionType, KafkaPostgresRequestAttributes, KafkaRequestTopicNameType } from './shared/interfaces/KafkaRequestAttributes';
+import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitRequestTopicNameType } from './shared/interfaces/RabbitRequestAttributes';
 import { LabomatixOrderEventHandler } from './handlers/LabomatixOrderEventHandler';
-import { QueueResponseStatus } from './shared/interfaces/KafkaResponseAttributes';
 import { ValidationError } from './shared/errors/ValidationError';
 import { ShopEventHandlder } from './handlers/ShopEventHandler';
 import { databaseInitializationPromise } from './database';
 import { FatalError } from './shared/errors/FatalError';
 import PointController from './database/controllers/PointContoller';
+import { RabbitResponseStatus } from './shared/interfaces/RabbitResponseAttributes';
+import { LogisticSchemaEventHandler } from './handlers/LogisticSchemaEventHandler';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
@@ -55,11 +56,11 @@ async function connectToRabbitMQ() {
 class RabbitMQResponse {
   protected _queue: string;
   protected _request_id: string;
-  protected _action: KafkaActionType;
+  protected _action: RabbitActionType;
   protected _data: any;
-  protected _status: QueueResponseStatus;
+  protected _status: RabbitResponseStatus;
 
-  constructor(queue: string, request_id: string, action: KafkaActionType, data: any) {
+  constructor(queue: string, request_id: string, action: RabbitActionType, data: any) {
     this._queue = queue;
     this._request_id = request_id;
     this._action = action;
@@ -91,7 +92,7 @@ class RabbitMQResponse {
     return this._status;
   }
 
-  set status(status: QueueResponseStatus) {
+  set status(status: RabbitResponseStatus) {
     if (!['OK', 'ERROR', 'NOT_FOUND', 'INVALID_DATA'].includes(status)) {
       throw new Error('Invalid status value');
     }
@@ -124,19 +125,25 @@ const setupConsumer = () => {
         const stringRequest = msg.content.toString();
         Logger.info('Received request:', stringRequest);
 
-        const topic: KafkaRequestTopicNameType = queue as KafkaRequestTopicNameType;
+        const topic: RabbitRequestTopicNameType = queue as RabbitRequestTopicNameType;
         const data = JSON.parse(stringRequest);
 
-        let handler: (event: KafkaPostgresRequestAttributes<KafkaRequestTopicNameType, KafkaActionType>) => Promise<any>;
+        let handler: (event: RabbitPostgresRequestAttributes<RabbitRequestTopicNameType, RabbitActionType>) => Promise<any>;
         let responseQueue: string;
 
         if (topic === 'notificator-db-shop-requests') {
           handler = ShopEventHandlder;
           responseQueue = 'notificator-db-shop-response';
-        } else if (topic === 'notificator-db-labomatix-order-requests') {
+        }
+        else if (topic === 'notificator-db-labomatix-order-requests') {
           handler = LabomatixOrderEventHandler;
           responseQueue = 'notificator-db-labomatix-order-response';
-        } else {
+        }
+        else if (topic === 'notificator-db-logistic-requests') {
+          handler = LogisticSchemaEventHandler;
+          responseQueue = 'notificator-db-logistic-response';
+        } 
+        else {
           Logger.error('Unknown topic:', topic);
           return;
         }

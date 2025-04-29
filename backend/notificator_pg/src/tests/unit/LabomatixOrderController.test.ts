@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import { databaseInitializationPromise } from "../../database"
 import LabomatixOrderController from "../../database/controllers/LabomatixOrderController";
 import { LabomatixOrder } from "../../database/models/LabomatixOrder";

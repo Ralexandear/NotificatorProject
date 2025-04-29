@@ -1,4 +1,3 @@
-import { Optional } from "sequelize";
 
 export type LabomatixOrderStatusType = 'CREATED' | 'PROCESSING' | 'FINISHED' | 'ERROR'
 
@@ -12,7 +11,7 @@ export interface LabomatixOrderAttributes {
   shopId: number | null,
 }
 
-export interface LabomatixOrderCreationAttributes extends Optional<LabomatixOrderAttributes, 'id' | 'shopId'> {}
+export interface LabomatixOrderCreationAttributes extends Omit<LabomatixOrderAttributes, 'id' | 'shopId'> {}
 
 export type LabomatixOrderUpdateAttributes = { id: number } & Partial<LabomatixOrderAttributes>;
 export type LabomatixOrderDeleteAttributes = {id: number};

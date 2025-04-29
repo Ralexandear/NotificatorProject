@@ -1,4 +1,3 @@
-import { Optional } from "sequelize";
 
 export interface LogisticSchemaAttributes {
   id: number;
@@ -7,4 +6,8 @@ export interface LogisticSchemaAttributes {
   shopId: number;
 }
 
-export interface LogisticSchemaCreationAttributes extends Optional<LogisticSchemaAttributes, 'id'> {}
+export interface LogisticSchemaCreationAttributes extends Omit<LogisticSchemaAttributes, 'id'> {}
+
+export type LogisticSchemaUpdateAttributes = { id: number } & Partial<LogisticSchemaAttributes>;
+export type LogisticSchemaDeleteAttributes = {id: number};
+export type LogisticSchemaFindAttributes = Partial<LogisticSchemaAttributes>;

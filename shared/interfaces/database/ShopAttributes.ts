@@ -1,5 +1,3 @@
-import { Optional } from "sequelize";
-
 export interface ShopAttributes {
   id: number;
   name: string;
@@ -8,7 +6,7 @@ export interface ShopAttributes {
 }
 
 // `ShopCreationAttributes` позволяет `id` быть необязательным
-export interface ShopCreationAttributes extends Optional<ShopAttributes, 'id'> {}
+export interface ShopCreationAttributes extends Omit<ShopAttributes, 'id'> {}
 export type ShopDeleteAttributes = {id: number}
 
 // `ShopUpdateAttributes` исключает `id` и делает все остальные поля необязательными
