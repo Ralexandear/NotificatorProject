@@ -1,4 +1,3 @@
-import Logger from "../../shared/utils/Logger";
 import { Point } from "../models/Point";
 import { BaseController } from "./BaseController";
 

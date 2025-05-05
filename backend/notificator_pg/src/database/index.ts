@@ -6,6 +6,9 @@ import Logger from '../shared/utils/Logger';
 import { LabomatixOrder } from './models/LabomatixOrder';
 import { Shop } from './models/Shop';
 import { LogisticSchema } from './models/LogisticSchema';
+import { UserStatusType, UserType } from '../shared/interfaces/database/UserAttributes';
+import { User } from './models/User';
+import { Shift } from './models/Shift';
 
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
@@ -121,13 +124,85 @@ LogisticSchema.init(
   }
 )
 
+User.init(
+  {
+    id,
+    telegramId: {
+      type: DataTypes.INTEGER,
+      unique: true,
+      key: 'telegram_id'
+    },
+    type: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      defaultValue: 'user' as UserType
+    },
+    presetStatus: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      key: 'preset_status'
+    },
+    status: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      defaultValue: 'active' as UserStatusType
+    },
+    fullName: {
+      key: 'full_name',
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    username: {
+      type: DataTypes.STRING(50),
+    },
+    program: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    messageId: {
+      key: 'message_id',
+      type: DataTypes.INTEGER
+    }
+  }, {
+    sequelize: postgres,
+    tableName: 'users'
+  }
+)
+
+Shift.init(
+  {
+    id,
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.STRING(10),
+      allowNull: false
+    },
+    pointId: {
+      key: 'point_id',
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    userId: {
+      key: 'user_id',
+      allowNull: false,
+      type: DataTypes.INTEGER
+    }
+  }, {
+    sequelize: postgres,
+    tableName: 'shift'
+  }
+)
+
 
 export const databaseInitializationPromise = (async () => {
   Logger.log('Waiting for postgres')
   await postgres.authenticate()
   await postgres.sync()
 
-  const models = [Point, LabomatixOrder, Shop, LogisticSchema] 
+  const models = [Point, LabomatixOrder, Shop, LogisticSchema, User, Shift] 
 
   for (const model of models) {
     await model.sync({alter: ! IS_PRODUCTION})

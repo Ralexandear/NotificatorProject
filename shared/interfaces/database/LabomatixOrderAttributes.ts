@@ -1,3 +1,4 @@
+import { CreationAttributes, DeleteAttributes, FindAttributes, UpdateAttributes } from "./BaseAttributes";
 
 export type LabomatixOrderStatusType = 'CREATED' | 'PROCESSING' | 'FINISHED' | 'ERROR'
 
@@ -11,8 +12,7 @@ export interface LabomatixOrderAttributes {
   shopId: number | null,
 }
 
-export interface LabomatixOrderCreationAttributes extends Omit<LabomatixOrderAttributes, 'id' | 'shopId'> {}
-
-export type LabomatixOrderUpdateAttributes = { id: number } & Partial<LabomatixOrderAttributes>;
-export type LabomatixOrderDeleteAttributes = {id: number};
-export type LabomatixOrderFindAttributes = Partial<LabomatixOrderAttributes>;
+export type LabomatixOrderCreationAttributes = CreationAttributes<LabomatixOrderAttributes>
+export type LabomatixOrderUpdateAttributes = UpdateAttributes<LabomatixOrderAttributes>
+export type LabomatixOrderDeleteAttributes = DeleteAttributes<LabomatixOrderAttributes>
+export type LabomatixOrderFindAttributes = FindAttributes<LabomatixOrderAttributes>

@@ -4,12 +4,13 @@ import { PointCreationAttributes, PointDeleteAttributes, PointFindAttributes, Po
 import { ShopCreationAttributes, ShopDeleteAttributes, ShopFindAttributes, ShopUpdateAttributes } from "./database/ShopAttributes";
 
 // Определяем список топиков
-export type RabbitRequestTopicNameType =
-  | 'notificator-db-labomatix-order-requests'
-  | 'notificator-db-point-requests'
-  | 'notificator-db-shop-requests'
-  | 'notificator-db-user-requests'
-  | 'notificator-db-logistic-requests';
+export const REQUEST_ENTITIES = ['labomatix-order', 'point', 'shop', 'user', 'logistic', 'shift'] as const;
+
+export type RabbitRequestTopicNameType = `notificator-db-${typeof REQUEST_ENTITIES[number]}-requests`;
+
+export const REQUEST_QUEUES: RabbitRequestTopicNameType[] = REQUEST_ENTITIES.map(
+  (entity) => `notificator-db-${entity}-requests` as const
+);
 
 // Определяем список возможных действий
 export type RabbitActionType =
@@ -64,6 +65,8 @@ export type RabbitPostgresRequestAttributes<T extends RabbitRequestTopicNameType
   ? { topic: T; request_id: string; action: A; data: RabbitActionDataMap[T][A] }
   : { topic: T; action: A; data: unknown }
   : { topic: T; action: A; data: unknown };
+
+export type RabbitRequestGeneric = RabbitPostgresRequestAttributes<RabbitRequestTopicNameType, RabbitActionType>
 
 export interface RabbitPostgresRequestInterface {
   topic: RabbitRequestTopicNameType;

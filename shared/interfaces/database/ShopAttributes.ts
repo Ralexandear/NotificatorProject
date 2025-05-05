@@ -1,3 +1,5 @@
+import { CreationAttributes, DeleteAttributes, FindAttributes, UpdateAttributes } from "./BaseAttributes";
+
 export interface ShopAttributes {
   id: number;
   name: string;
@@ -5,12 +7,9 @@ export interface ShopAttributes {
   address: string;
 }
 
-// `ShopCreationAttributes` позволяет `id` быть необязательным
-export interface ShopCreationAttributes extends Omit<ShopAttributes, 'id'> {}
-export type ShopDeleteAttributes = {id: number}
-
-// `ShopUpdateAttributes` исключает `id` и делает все остальные поля необязательными
-export type ShopUpdateAttributes = {id: number} & Omit<Partial<ShopAttributes>, 'id'>;
+export type ShopCreationAttributes = CreationAttributes<ShopAttributes>;
+export type ShopUpdateAttributes = UpdateAttributes<ShopAttributes>;
+export type ShopDeleteAttributes = DeleteAttributes<ShopAttributes>;
 
 export type ShopFindAttributes = {
   names: string[]

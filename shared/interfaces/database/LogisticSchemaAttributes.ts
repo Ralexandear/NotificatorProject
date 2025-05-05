@@ -1,3 +1,4 @@
+import { CreationAttributes, DeleteAttributes, FindAttributes, UpdateAttributes } from "./BaseAttributes";
 
 export interface LogisticSchemaAttributes {
   id: number;
@@ -6,8 +7,7 @@ export interface LogisticSchemaAttributes {
   shopId: number;
 }
 
-export interface LogisticSchemaCreationAttributes extends Omit<LogisticSchemaAttributes, 'id'> {}
-
-export type LogisticSchemaUpdateAttributes = { id: number } & Partial<LogisticSchemaAttributes>;
-export type LogisticSchemaDeleteAttributes = {id: number};
-export type LogisticSchemaFindAttributes = Partial<LogisticSchemaAttributes>;
+export type LogisticSchemaCreationAttributes = CreationAttributes<LogisticSchemaAttributes>;
+export type LogisticSchemaUpdateAttributes = UpdateAttributes<LogisticSchemaAttributes>;
+export type LogisticSchemaDeleteAttributes = DeleteAttributes<LogisticSchemaAttributes>;
+export type LogisticSchemaFindAttributes = FindAttributes<LogisticSchemaAttributes>;

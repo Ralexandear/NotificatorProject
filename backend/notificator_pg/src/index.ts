@@ -1,14 +1,17 @@
 import amqp from 'amqplib';
 import Logger from './shared/utils/Logger';
-import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitRequestTopicNameType } from './shared/interfaces/RabbitRequestAttributes';
+import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitRequestTopicNameType, REQUEST_QUEUES } from './shared/interfaces/RabbitRequestAttributes';
 import { LabomatixOrderEventHandler } from './handlers/LabomatixOrderEventHandler';
 import { ValidationError } from './shared/errors/ValidationError';
 import { ShopEventHandlder } from './handlers/ShopEventHandler';
 import { databaseInitializationPromise } from './database';
 import { FatalError } from './shared/errors/FatalError';
 import PointController from './database/controllers/PointContoller';
-import { RabbitResponseStatus } from './shared/interfaces/RabbitResponseAttributes';
+import { RabbitResponseStatus, RabbitResponseTopicNameType, RESPONSE_QUEUES } from './shared/interfaces/RabbitResponseAttributes';
 import { LogisticSchemaEventHandler } from './handlers/LogisticSchemaEventHandler';
+import { ShiftEventHandlder } from './handlers/ShiftEventController';
+import { UserEventHandlder } from './handlers/UserEventHandler';
+import { PointEventHandler } from './handlers/PointEventHandler';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
@@ -17,19 +20,8 @@ Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
 let channel: amqp.Channel;
 let connection: amqp.ChannelModel;
 
-const requestQueues = [
-  'notificator-db-labomatix-order-requests',
-  'notificator-db-point-requests',
-  'notificator-db-shop-requests',
-  'notificator-db-user-requests',
-];
 
-const responseQueues = [
-  'notificator-db-labomatix-order-response',
-  'notificator-db-point-response',
-  'notificator-db-shop-response',
-  'notificator-db-user-response',
-];
+
 
 async function connectToRabbitMQ() {
   try {
@@ -37,11 +29,11 @@ async function connectToRabbitMQ() {
     channel = await connection.createChannel();
 
     // Создаём очереди для запросов и ответов
-    for (const queue of requestQueues) {
+    for (const queue of REQUEST_QUEUES) {
       await channel.assertQueue(queue, { durable: true });
     }
 
-    for (const queue of responseQueues) {
+    for (const queue of RESPONSE_QUEUES) {
       await channel.assertQueue(queue, { durable: true });
     }
 
@@ -118,7 +110,7 @@ class RabbitMQResponse {
 }
 
 const setupConsumer = () => {
-  for (const queue of requestQueues) {
+  for (const queue of REQUEST_QUEUES) {
     channel.consume(queue, async (msg) => {
 
       if (msg) {
@@ -129,7 +121,7 @@ const setupConsumer = () => {
         const data = JSON.parse(stringRequest);
 
         let handler: (event: RabbitPostgresRequestAttributes<RabbitRequestTopicNameType, RabbitActionType>) => Promise<any>;
-        let responseQueue: string;
+        let responseQueue: RabbitResponseTopicNameType;
 
         if (topic === 'notificator-db-shop-requests') {
           handler = ShopEventHandlder;
@@ -143,6 +135,18 @@ const setupConsumer = () => {
           handler = LogisticSchemaEventHandler;
           responseQueue = 'notificator-db-logistic-response';
         } 
+        else if(topic === 'notificator-db-shift-requests') {
+          handler = ShiftEventHandlder;
+          responseQueue = 'notificator-db-shift-response';
+        }
+        else if(topic === 'notificator-db-user-requests') {
+          handler = UserEventHandlder;
+          responseQueue = 'notificator-db-user-response';
+        }
+        else if(topic === 'notificator-db-point-requests') {
+          handler = PointEventHandler;
+          responseQueue = 'notificator-db-point-response';
+        }
         else {
           Logger.error('Unknown topic:', topic);
           return;
