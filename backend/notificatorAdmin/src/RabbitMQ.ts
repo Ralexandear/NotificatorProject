@@ -1,7 +1,7 @@
 import amqp from 'amqplib';
 import Logger from './shared/utils/Logger';
-import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitPostgresRequestInterface, RabbitRequestTopicNameType } from './shared/interfaces/RabbitRequestAttributes';
-import { GenericRabbitResponse, RabbitResponseAttributes } from './shared/interfaces/RabbitResponseAttributes';
+import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitPostgresRequestInterface, REQUEST_QUEUES } from './shared/interfaces/RabbitRequestAttributes';
+import { GenericRabbitResponse, RabbitRequestToResponseMap, RabbitResponseAttributes, RabbitResponseDataMap, RESPONSE_QUEUES } from './shared/interfaces/RabbitResponseAttributes';
 import { RABBIT_RESPONSE_TIMEOUT } from './constants';
 import { FatalError } from './shared/errors/FatalError';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,26 +13,11 @@ let channel: amqp.Channel;
 let connection: amqp.ChannelModel;
 const pendingRequests = new RedisController<GenericRabbitResponse | null>('notificator_admin_pr', 600)
 
-const requestQueues = [
-  'notificator-db-labomatix-order-requests',
-  'notificator-db-point-requests',
-  'notificator-db-shop-requests',
-  'notificator-db-user-requests',
-];
-
-const responseQueues = [
-  'notificator-db-labomatix-order-response',
-  'notificator-db-point-response',
-  'notificator-db-shop-response',
-  'notificator-db-user-response',
-];
-
-
 
 
 // Отправка ответа в очередь
 export class RabbitMQRequest<
-  T extends RabbitRequestTopicNameType,
+  T extends keyof RabbitRequestToResponseMap,
   A extends RabbitActionType
 > implements RabbitPostgresRequestInterface {
   protected _topic: T;
@@ -67,7 +52,7 @@ export class RabbitMQRequest<
     return this._data;
   }
 
-  async send(): Promise<RabbitResponseAttributes<T>['data']> {
+  async send(): Promise<RabbitResponseAttributes<RabbitRequestToResponseMap[T]>['data']> {
     return new Promise(async (resolve, reject) => {
       const request = {
         topic: this.topic,
@@ -92,6 +77,7 @@ export class RabbitMQRequest<
             return obj && typeof obj === 'object' && 'request_id' in obj && 'status' in obj;
           }
           
+         
           if (!isGenericRabbitResponse(response)) {
             Logger.error('Invalid response format: ' + JSON.stringify(response));
           }
@@ -99,7 +85,7 @@ export class RabbitMQRequest<
             Logger.error('Received unsuccessful message for request:', JSON.stringify(request), '\n', 'RESPONSE', JSON.stringify(response));
           }
           else {
-            resolve(response.data as RabbitResponseAttributes<T>['data']);
+            resolve(response.data as RabbitResponseAttributes<RabbitRequestToResponseMap[T]>['data']);
           }
           //only for errors
           reject(new Error('Error processing RabbitMQ request: ' + request.request_id));
@@ -127,7 +113,7 @@ async function connectToRabbitMQ(retryCount = 3, delay = 5000) {
       connection = await amqp.connect('amqp://localhost');
       channel = await connection.createChannel();
 
-      for (const queue of [...requestQueues, ...responseQueues]) {
+      for (const queue of [...REQUEST_QUEUES, ...RESPONSE_QUEUES]) {
         await channel.assertQueue(queue, { durable: true });
       }
 
@@ -152,7 +138,7 @@ async function connectToRabbitMQ(retryCount = 3, delay = 5000) {
 
 
 const setupConsumer = () => {
-  for (const queue of responseQueues) {
+  for (const queue of RESPONSE_QUEUES) {
     channel.consume(queue, async (msg) => {
       if (msg) {
         const stringRequest = msg.content.toString();
