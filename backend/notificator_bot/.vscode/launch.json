@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Запуск программы",
+      "program": "${workspaceFolder}/src/index.ts", // Укажите основной файл
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"], // Маппинг на компилированный JS
+      "sourceMaps": true  // Включение source maps
+    }
+  ]
+}
