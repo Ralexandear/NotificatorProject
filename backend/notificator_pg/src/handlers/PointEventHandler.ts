@@ -1,8 +1,8 @@
 import PointController from "../database/controllers/PointContoller";
 import { ValidationError } from "../shared/errors/ValidationError";
-import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitRequestTopicNameType } from "../shared/interfaces/RabbitRequestAttributes";
+import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
 
-export async function PointEventHandler(event: RabbitPostgresRequestAttributes<RabbitRequestTopicNameType, RabbitActionType>) {
+export async function PointEventHandler(event: RabbitPgRequestAttributes<RabbitPgRequestTopicNameType, RabbitPgActionType>) {
   if (event.topic !== 'notificator-db-point-requests') {
     throw new Error('Invalid topic in request' + JSON.stringify(event))
   };

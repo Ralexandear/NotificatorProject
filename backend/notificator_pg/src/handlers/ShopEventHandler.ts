@@ -1,8 +1,8 @@
 import { ShopController } from "../database/controllers/ShopController";
 import { ValidationError } from "../shared/errors/ValidationError";
-import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitRequestTopicNameType } from "../shared/interfaces/RabbitRequestAttributes";
+import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
 
-export async function ShopEventHandlder(event: RabbitPostgresRequestAttributes<RabbitRequestTopicNameType, RabbitActionType>) {
+export async function ShopEventHandlder(event: RabbitPgRequestAttributes<RabbitPgRequestTopicNameType, RabbitPgActionType>) {
   if (event.topic !== 'notificator-db-shop-requests') {
     throw new Error('Invalid topic in request' + JSON.stringify(event))
   };

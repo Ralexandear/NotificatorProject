@@ -1,8 +1,8 @@
 import UserController from "../database/controllers/UserController";
 import { ValidationError } from "../shared/errors/ValidationError";
-import { RabbitRequestGeneric } from "../shared/interfaces/RabbitRequestAttributes";
+import { RabbitPgRequestGeneric } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
 
-export async function UserEventHandlder(event: RabbitRequestGeneric) {
+export async function UserEventHandlder(event: RabbitPgRequestGeneric) {
   if (event.topic !== 'notificator-db-shop-requests') {
     throw new Error('Invalid topic in request' + JSON.stringify(event))
   };

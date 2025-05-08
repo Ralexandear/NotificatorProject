@@ -1,19 +1,13 @@
 import './configurations'
-import { IS_PRODUCTION, RABBIT_RESPONSE_TIMEOUT } from './constants';
-import { savebotUpdateToMongo, saveUserbotUpdateToMongo } from './database/mongo';
+import { IS_PRODUCTION } from './constants';
+import { saveUserbotUpdateToMongo } from './database/mongo';
 import './telegram/TelegramBot';
 import { UserBot } from './telegram/UserBot';
-import { bot } from './telegram/TelegramBot';
 import fs from 'fs';
 import NewMessageHandler from './handlers/userbot/NewMessageHandler';
 import { FatalError } from './shared/errors/FatalError';
 import Logger from './shared/utils/Logger';
-import { RabbitActionType, RabbitRequestTopicNameType, RabbitPostgresRequestAttributes } from './shared/interfaces/RabbitRequestAttributes';
-import { GenericRabbitResponse, RabbitResponseAttributes, RabbitResponseStatus } from './shared/interfaces/RabbitResponseAttributes';
-import { sleep } from './utils/sleep';
-import { InternalError } from './shared/errors/InternalError';
 import { rabbitInitializationPromise } from './RabbitMQ';
-import { newBotMessageHandler } from './handlers/bot/NewBotMessageHandler';
 
 
 
@@ -53,7 +47,7 @@ process.stderr.write = errorStream.write.bind(errorStream);
 // Основной процесс
 const initializationPromise = (async () => {
   await rabbitInitializationPromise;
-  await bot.isReady();
+  // await bot.isReady();
   await UserBot.isReady();
 
 })();
@@ -89,31 +83,31 @@ async function main() {
       )
   })
 
-  bot.client.on('update', update => {
-    Logger.info('Admin bot received update', JSON.stringify(update));
+  // bot.client.on('update', update => {
+  //   Logger.info('Admin bot received update', JSON.stringify(update));
 
-    savebotUpdateToMongo(update)
-      .then(
-        (mongoId) => {
-          if (mongoId === undefined) {
-            throw new FatalError('Unexpected mongo behaviour, object id should not be undefined!')
-          }
-          const mongoStringId = mongoId.toString();
-          return mongoStringId
-        })
-      .then(
-        (mongoUpdateId) => {
-          if (update._ === 'updateNewMessage') {
-            return newBotMessageHandler(update, mongoUpdateId);
-          }
-        }
-      )
-      .catch(
-        error => {
-          Logger.error("An error occured while processing update", error);
-        }
-      )
-  })
+  //   savebotUpdateToMongo(update)
+  //     .then(
+  //       (mongoId) => {
+  //         if (mongoId === undefined) {
+  //           throw new FatalError('Unexpected mongo behaviour, object id should not be undefined!')
+  //         }
+  //         const mongoStringId = mongoId.toString();
+  //         return mongoStringId
+  //       })
+  //     .then(
+  //       (mongoUpdateId) => {
+  //         if (update._ === 'updateNewMessage') {
+  //           return newBotMessageHandler(update, mongoUpdateId);
+  //         }
+  //       }
+  //     )
+  //     .catch(
+  //       error => {
+  //         Logger.error("An error occured while processing update", error);
+  //       }
+  //     )
+  // })
 }
 
 main().catch(Logger.error);

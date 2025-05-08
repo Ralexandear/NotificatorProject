@@ -1,8 +1,8 @@
 import { LabomatixOrderController } from "../database/controllers/LabomatixOrderController";
 import { ValidationError } from "../shared/errors/ValidationError";
-import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitRequestTopicNameType } from "../shared/interfaces/RabbitRequestAttributes";
+import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
 
-export async function LabomatixOrderEventHandler(event: RabbitPostgresRequestAttributes<RabbitRequestTopicNameType, RabbitActionType>) {
+export async function LabomatixOrderEventHandler(event: RabbitPgRequestAttributes<RabbitPgRequestTopicNameType, RabbitPgActionType>) {
   if (event.topic !== 'notificator-db-labomatix-order-requests') {
     throw new Error('Invalid topic in request' + JSON.stringify(event))
   };
