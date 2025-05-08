@@ -1,60 +1,98 @@
 import 'dotenv/config';
 import TelegramBot from 'node-telegram-bot-api';
 import { BOT_TOKEN } from './constants';
-// import { TextMessageHandler } from './handlers/textMessageHandlers/TextMessageHandler';
-// import { CallbackQueryHandler } from './handlers/callbackQueryHandlers/CallbackQueryHandler';
 import Logger from './shared/utils/Logger';
+import { connectToRabbitMQ } from './RabbitMQ';
 
 const bot = new TelegramBot(BOT_TOKEN, {
-  //@ts-ignore
-  polling: { autoStart: false, params: {}, skip_pending_updates: true },
+  polling: {
+    autoStart: false,
+    params: {},
+    //@ts-ignore type don't have skip pending updates
+    skip_pending_updates: true,
+  },
 });
-// bot.on("message", TextMessageHandler)
-// bot.on("callback_query", CallbackQueryHandler)
 
-bot.getUpdates().then(
-  (updates) => {
-    Logger.debug('Got updates:', JSON.stringify(updates))
-    // if there are pending updates and skip_pending_updates is true
-    //@ts-ignore for bot options
-    if (updates.length > 0 && bot.options.polling.skip_pending_updates) {
-      //set offset to last update's id + 1 to skip pending updates
-      //@ts-ignore
-      bot.options.polling.params = {
-        offset: updates[updates.length - 1]?.update_id + 1,
-      };
-      Logger.debug(`Will be skipped updates: ${updates.length}`);
-      Logger.debug(`Start polling with offset: ${updates[updates.length - 1]?.update_id + 1}`,);
-    }
+let isReconnecting = false
+// Обработчик ошибок polling
+bot.on('polling_error', (error) => {
+  if (isReconnecting) return
 
-    // after all start polling
-    bot.startPolling()
-      .then(() => Logger.info('Notificator bot started polling'))
-  },
-  (error) => {
-    Logger.error(error);
-  },
-);
+  Logger.error('FATAL POLLING ERROR:', error);
+  Logger.warn('Attempting to reconnect to Telegram...');
+  reconnectBot();
+});
 
-// const botInitializationPromise = (async () => {
-//   const adminTelegramId = process.env.ADMIN;
+// Функция для переподключения бота
+const reconnectBot = async (retryDelay: number = 5000, force = false) => {
+  if (isReconnecting && ! force) return
+  
+  isReconnecting = true
+  
+  try {
+    Logger.info('Reconnecting to Telegram...');
+    await bot.stopPolling(); // Останавливаем текущий polling
+    await bot.startPolling(); // Перезапускаем polling
+    await bot.getMe()
 
-//   if (!adminTelegramId) throw new Error('Required parameter ADMIN is missing in env')
-//   Admin = await UserController.findOrCreate(adminTelegramId, 'admin', 'ralexandear')
+    Logger.info('Reconnected to Telegram successfully.');
+    isReconnecting = false
+  } catch (error) {
+    Logger.error('Failed to reconnect to Telegram:', error);
+    Logger.warn(`Retrying to reconnect in ${retryDelay / 1000} seconds...`);
+    setTimeout(() => reconnectBot(Math.min(retryDelay * 2, 60000), true), retryDelay); // Увеличиваем задержку до 60 секунд
+  } 
+};
 
-//   console.log(await bot.getMe());
-//   console.log('bot is ready')
-// })();
+// Запуск получения обновлений
+bot.getUpdates()
+  .then(
+    (updates) => {
+      Logger.debug('Got updates:', JSON.stringify(updates));
+      // Если есть ожидающие обновления и skip_pending_updates включён
+      //@ts-ignore for bot options
+      if (updates.length > 0 && bot.options.polling.skip_pending_updates) {
+        // Устанавливаем offset для пропуска ожидающих обновлений
+        //@ts-ignore
+        bot.options.polling.params = {
+          offset: updates[updates.length - 1]?.update_id + 1,
+        };
+        Logger.debug(`Will be skipped updates: ${updates.length}`);
+        Logger.debug(
+          `Start polling with offset: ${
+            updates[updates.length - 1]?.update_id + 1
+          }`,
+        );
+      }
 
+      // После всего запускаем polling
+      bot.startPolling().then(() => Logger.info('Notificator bot started polling'));
+    },
+    (error) => {
+      Logger.error(error);
+      throw error;
+    },
+  )
+  .then(() => {
+    const attemptRabbitMQConnection = async (retryDelay: number = 30000) => {
+      Logger.info('Trying to establish RabbitMQ connection');
 
-// async function syncPoints() {
-//   const pointsIds = new Set(await PointsController.getPointIds());
+      try {
+        await connectToRabbitMQ();
+        Logger.info('RabbitMQ connection established successfully');
+      } catch (error) {
+        Logger.error(error);
+        Logger.warn(
+          `Unable to establish RabbitMQ connection, retrying in ${
+            retryDelay / 1000
+          } seconds`,
+        );
+        setTimeout(
+          () => attemptRabbitMQConnection(Math.min(retryDelay * 2, 300000)),
+          retryDelay,
+        ); // Задержка до 5 минут
+      }
+    };
 
-//   for (const pointId of Config.enabledPoints) {
-//     if (pointsIds.has(pointId)) continue;
-//     await PointsController.create(pointId);
-//   }
-// }
-
-// export { botInitializationPromise, bot };
-// export default bot;
+    attemptRabbitMQConnection();
+  });
