@@ -1,13 +1,13 @@
 import amqp from 'amqplib';
 import Logger from './shared/utils/Logger';
-import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType, REQUEST_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgRequestAttributes';
+import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType, REQUEST_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgRequestAttributes';
 import { LabomatixOrderEventHandler } from './handlers/LabomatixOrderEventHandler';
 import { ValidationError } from './shared/errors/ValidationError';
 import { ShopEventHandlder } from './handlers/ShopEventHandler';
 import { databaseInitializationPromise } from './database';
 import { FatalError } from './shared/errors/FatalError';
 import PointController from './database/controllers/PointContoller';
-import { RabbitResponseStatus, RabbitResponseTopicNameType, RESPONSE_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgResponseAttributes';
+import { RabbitResponseStatus, RabbitResponseTopicNameType, RESPONSE_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgResponseAttributes';
 import { LogisticSchemaEventHandler } from './handlers/LogisticSchemaEventHandler';
 import { ShiftEventHandlder } from './handlers/ShiftEventController';
 import { UserEventHandlder } from './handlers/UserEventHandler';
@@ -27,11 +27,11 @@ async function connectToRabbitMQ() {
     channel = await connection.createChannel();
 
     // Создаём очереди для запросов и ответов
-    for (const queue of REQUEST_QUEUES) {
+    for (const queue of REQUEST_PG_QUEUES) {
       await channel.assertQueue(queue, { durable: true });
     }
 
-    for (const queue of RESPONSE_QUEUES) {
+    for (const queue of RESPONSE_PG_QUEUES) {
       await channel.assertQueue(queue, { durable: true });
     }
 
@@ -108,7 +108,7 @@ class RabbitMQResponse {
 }
 
 const setupConsumer = () => {
-  for (const queue of REQUEST_QUEUES) {
+  for (const queue of REQUEST_PG_QUEUES) {
     channel.consume(queue, async (msg) => {
 
       if (msg) {
@@ -154,7 +154,7 @@ const setupConsumer = () => {
         const response = new RabbitMQResponse(responseQueue, data.request_id, data.action, data.data);
 
         try {
-          response.data = await handler(data);
+          response.data = await handler(data).then(result => result.toJSON());
           response.status = response.data ? 'OK' : 'NOT_FOUND';
         } catch (error) {
           if (error instanceof ValidationError) {

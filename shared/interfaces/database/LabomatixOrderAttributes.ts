@@ -12,7 +12,7 @@ export interface LabomatixOrderAttributes {
   shopId: number | null,
 }
 
-export type LabomatixOrderCreationAttributes = CreationAttributes<LabomatixOrderAttributes>
+export type LabomatixOrderCreationAttributes = Omit< CreationAttributes<LabomatixOrderAttributes>, 'shopId'>
 export type LabomatixOrderUpdateAttributes = UpdateAttributes<LabomatixOrderAttributes>
 export type LabomatixOrderDeleteAttributes = DeleteAttributes<LabomatixOrderAttributes>
 export type LabomatixOrderFindAttributes = FindAttributes<LabomatixOrderAttributes>

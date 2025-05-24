@@ -1,9 +1,9 @@
-import { LabomatixOrderCreationAttributes, LabomatixOrderDeleteAttributes, LabomatixOrderFindAttributes, LabomatixOrderUpdateAttributes } from "../database/LabomatixOrderAttributes";
-import { LogisticSchemaCreationAttributes, LogisticSchemaDeleteAttributes, LogisticSchemaFindAttributes, LogisticSchemaUpdateAttributes } from "../database/LogisticSchemaAttributes";
-import { PointCreationAttributes, PointDeleteAttributes, PointFindAttributes, PointUpdateAttributes } from "../database/PointAttributes";
-import { ShiftCreationAttributes, ShiftDeleteAttributes, ShiftFindAttributes, ShiftUpdateAttributes } from "../database/ShiftAttributes";
-import { ShopCreationAttributes, ShopDeleteAttributes, ShopFindAttributes, ShopUpdateAttributes } from "../database/ShopAttributes";
-import { UserCreationAttributes, UserDeleteAttributes, UserFindAttributes, UserUpdateAttributes } from "../database/UserAttributes";
+import { LabomatixOrderAttributes, LabomatixOrderCreationAttributes, LabomatixOrderDeleteAttributes, LabomatixOrderFindAttributes, LabomatixOrderUpdateAttributes } from "../database/LabomatixOrderAttributes";
+import { LogisticSchemaAttributes, LogisticSchemaCreationAttributes, LogisticSchemaDeleteAttributes, LogisticSchemaFindAttributes, LogisticSchemaUpdateAttributes } from "../database/LogisticSchemaAttributes";
+import { PointAttributes, PointCreationAttributes, PointDeleteAttributes, PointFindAttributes, PointUpdateAttributes } from "../database/PointAttributes";
+import { ShiftAttributes, ShiftCreationAttributes, ShiftDeleteAttributes, ShiftFindAttributes, ShiftUpdateAttributes } from "../database/ShiftAttributes";
+import { ShopAttributes, ShopCreationAttributes, ShopDeleteAttributes, ShopFindAttributes, ShopUpdateAttributes } from "../database/ShopAttributes";
+import { UserAttributes, UserCreationAttributes, UserDeleteAttributes, UserFindAttributes, UserUpdateAttributes } from "../database/UserAttributes";
 
 // Определяем список топиков
 export const REQUEST_ENTITIES = ['labomatix-order', 'point', 'shop', 'user', 'logistic', 'shift'] as const;
@@ -22,7 +22,7 @@ export type RabbitPgActionType =
   | 'FIND_OR_CREATE'
   | 'DELETE'
   | 'FIND'
-  | 'GET_ALL';
+  | 'GET_ALL'
 
 // Определяем структуры данных для каждого топика
 type RabbitPgActionDataMap = {
@@ -73,6 +73,9 @@ type RabbitPgActionDataMap = {
     DELETE: ShiftDeleteAttributes;
     FIND: ShiftFindAttributes;
     GET: { id: number };
+  };
+  'notificator-tg-bot-request': {
+    SEND_MESSAGE: { chat_id: number; text: string; parse_mode?: 'Markdown' | 'HTML' };
   }
 };
 
@@ -93,3 +96,39 @@ export interface RabbitPgRequestInterface {
   data: any;
 }
 
+/**
+ * RESPONSE TYPES
+ */
+
+export type RabbitResponseTopicNameType = `notificator-db-${typeof REQUEST_ENTITIES[number]}-response`;
+
+export const RESPONSE_PG_QUEUES: RabbitResponseTopicNameType[] = REQUEST_ENTITIES.map(
+  (entity) => `notificator-db-${entity}-response` as const
+);
+
+export type RabbitResponseDataMap = {
+  'notificator-db-labomatix-order-response': LabomatixOrderAttributes;
+  'notificator-db-shop-response': ShopAttributes;
+  'notificator-db-point-response': PointAttributes;
+  'notificator-db-logistic-response': LogisticSchemaAttributes;
+  'notificator-db-user-response': UserAttributes;
+  'notificator-db-shift-response': ShiftAttributes;
+};
+
+export type RabbitResponseAttributes<T extends RabbitResponseTopicNameType | string> =
+  T extends keyof RabbitResponseDataMap
+  ? { status: 'OK'; data: RabbitResponseDataMap[T]; request_id: string; }
+  : { status: 'NOT_FOUND' | 'ERROR' | 'INVALID_DATA'; data: string; request_id: string; };
+
+export type GenericRabbitResponse =
+  | { status: 'OK'; data: RabbitResponseDataMap[keyof RabbitResponseDataMap]; request_id: string }
+  | { status: 'NOT_FOUND' | 'ERROR' | 'INVALID_DATA'; data: string; request_id: string };
+
+export type RabbitRequestToResponseMap = {
+  "notificator-db-labomatix-order-requests": "notificator-db-labomatix-order-response";
+  "notificator-db-shop-requests": "notificator-db-shop-response";
+  "notificator-db-point-requests": "notificator-db-point-response";
+  "notificator-db-logistic-requests": "notificator-db-logistic-response";
+  "notificator-db-user-requests": "notificator-db-user-response";
+  "notificator-db-shift-requests": "notificator-db-shift-response";
+};

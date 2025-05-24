@@ -3,7 +3,7 @@ import { ValidationError } from "../shared/errors/ValidationError";
 import { RabbitPgRequestGeneric } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
 
 export async function UserEventHandlder(event: RabbitPgRequestGeneric) {
-  if (event.topic !== 'notificator-db-shop-requests') {
+  if (event.topic !== 'notificator-db-user-requests') {
     throw new Error('Invalid topic in request' + JSON.stringify(event))
   };
 

@@ -4,11 +4,13 @@ FROM node:18-alpine
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
+# Установить Python3 и build tools для node-gyp
+RUN apk add --no-cache python3 make g++
+
 # Копируем только необходимые файлы для установки зависимостей
 COPY package.json package-lock.json ./
 
 # Устанавливаем зависимости без dev и очищаем кеш
-RUN tsc
 RUN npm install --omit=dev && npm cache clean --force
 
 # Копируем только скомпилированные файлы

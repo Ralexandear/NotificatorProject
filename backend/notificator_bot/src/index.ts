@@ -3,6 +3,7 @@ import TelegramBot from 'node-telegram-bot-api';
 import { BOT_TOKEN } from './constants';
 import Logger from './shared/utils/Logger';
 import { connectToRabbitMQ } from './RabbitMQ';
+import { TextMessageHandler } from './handlers/textMessageHandlers/TextMessageHandler';
 
 const bot = new TelegramBot(BOT_TOKEN, {
   polling: {
@@ -22,6 +23,8 @@ bot.on('polling_error', (error) => {
   Logger.warn('Attempting to reconnect to Telegram...');
   reconnectBot();
 });
+
+bot.on('message', TextMessageHandler)
 
 // Функция для переподключения бота
 const reconnectBot = async (retryDelay: number = 5000, force = false) => {

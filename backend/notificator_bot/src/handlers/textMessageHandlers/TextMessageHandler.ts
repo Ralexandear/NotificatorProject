@@ -1,18 +1,14 @@
 import TelegramBot from "node-telegram-bot-api";
-import { botInitializationPromise } from "../..";
 import NotificatorHandler from "./modules/NotificatorHandler";
-import UserController from "../../../controllers/databaseControllers/UserController";
 import { MessageConstructor } from "../../messageConstructor/MessageConstructor";
 import MenuHandler from "./modules/MenuHandler";
 import { UserModel } from "../../../../../../notificatorNew/src/database/models/sequelize/User.model";
 import { UserStatusEnum } from "../../../../../../notificatorNew/src/enums/UserStatus.enum";
 import { User } from "../../../../../../notificatorNew/src/database/models/public/User";
-import { AuthError } from "../../../../../../notificatorNew/src/Errors/AuthError";
 
 
 
 export async function TextMessageHandler(message: TelegramBot.Message) {
-  await botInitializationPromise;
   try {
     console.log(TextMessageHandler.name, message);
     if (message?.chat?.type !== 'private') return NotificatorHandler(message);

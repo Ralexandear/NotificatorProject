@@ -3,7 +3,7 @@ import { ValidationError } from "../shared/errors/ValidationError";
 import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
 
 export async function LogisticSchemaEventHandler(event: RabbitPgRequestAttributes<RabbitPgRequestTopicNameType, RabbitPgActionType>) {
-  if (event.topic !== 'notificator-db-point-requests') {
+  if (event.topic !== 'notificator-db-logistic-requests') {
     throw new Error('Invalid topic in request' + JSON.stringify(event))
   };
 
