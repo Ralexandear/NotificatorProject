@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { LabomatixOrderController } from "../../database/controllers/LabomatixOrderController";
 import { rabbitInitializationPromise } from "../../RabbitMQ"
 import { LabomatixOrderCreationAttributes, LabomatixOrderStatusType } from "../../shared/interfaces/database/LabomatixOrderAttributes";

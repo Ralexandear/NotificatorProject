@@ -20,7 +20,7 @@ export class UserBotClass extends TelegramBot {
     if (this._isInit) return this._instance;
     else this._isInit = true;
 
-    Logger.log('UserBot waiting for bot')
+    // Logger.log('UserBot waiting for bot')
     const bot = this._instance = new UserBotClass(userBotClient); // Создаём экземпляр
     bot.initializationPromise = userBotClient.login()
       .then(async () => {

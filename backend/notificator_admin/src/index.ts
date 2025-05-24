@@ -15,28 +15,28 @@ if (!IS_PRODUCTION) {
   Logger.useDebug();
 }
 
-// Создаём потоки для перенаправления стандартного вывода и ошибок
-const logFile = fs.createWriteStream('./logs/output.log', { flags: 'a' });
-const errorFile = fs.createWriteStream('./logs/error.log', { flags: 'a' });
+// // Создаём потоки для перенаправления стандартного вывода и ошибок
+// const logFile = fs.createWriteStream('output.log', { flags: 'a' });
+// const errorFile = fs.createWriteStream('error.log', { flags: 'a' });
 
-const logStream = new (require('stream').Writable)({
-  write(chunk: any, encoding: any, callback: any) {
-    process.stdout.write(chunk); // Вывод в консоль
-    logFile.write(chunk); // Запись в файл
-    callback();
-  }
-});
+// const logStream = new (require('stream').Writable)({
+//   write(chunk: any, encoding: any, callback: any) {
+//     process.stdout.write(chunk); // Вывод в консоль
+//     logFile.write(chunk); // Запись в файл
+//     callback();
+//   }
+// });
 
-const errorStream = new (require('stream').Writable)({
-  write(chunk: any, encoding: any, callback: any) {
-    process.stderr.write(chunk); // Вывод в консоль ошибок
-    errorFile.write(chunk); // Запись в файл ошибок
-    callback();
-  }
-});
+// const errorStream = new (require('stream').Writable)({
+//   write(chunk: any, encoding: any, callback: any) {
+//     process.stderr.write(chunk); // Вывод в консоль ошибок
+//     errorFile.write(chunk); // Запись в файл ошибок
+//     callback();
+//   }
+// });
 
-process.stdout.write = logStream.write.bind(logStream);
-process.stderr.write = errorStream.write.bind(errorStream);
+// process.stdout.write = logStream.write.bind(logStream);
+// process.stderr.write = errorStream.write.bind(errorStream);
 
 
 
@@ -46,9 +46,10 @@ process.stderr.write = errorStream.write.bind(errorStream);
 
 // Основной процесс
 const initializationPromise = (async () => {
-  await rabbitInitializationPromise;
-  // await bot.isReady();
   await UserBot.isReady();
+
+  // await rabbitInitializationPromise;
+  // await bot.isReady();
 
 })();
 

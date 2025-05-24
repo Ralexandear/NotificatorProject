@@ -1,11 +1,11 @@
 import amqp from 'amqplib';
 import Logger from './shared/utils/Logger';
-import { RabbitActionType, RabbitPostgresRequestAttributes, RabbitPostgresRequestInterface, REQUEST_QUEUES } from './shared/interfaces/RabbitRequestAttributes';
-import { GenericRabbitResponse, RabbitRequestToResponseMap, RabbitResponseAttributes, RabbitResponseDataMap, RESPONSE_QUEUES } from './shared/interfaces/RabbitResponseAttributes';
 import { RABBIT_RESPONSE_TIMEOUT } from './constants';
 import { FatalError } from './shared/errors/FatalError';
 import { v4 as uuidv4 } from 'uuid';
 import RedisController from './database/controllers/RedisController';
+import { GenericRabbitResponse, RabbitRequestToResponseMap, RabbitResponseAttributes, RESPONSE_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgResponseAttributes';
+import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestInterface, REQUEST_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgRequestAttributes';
 
 
 // Соединение и каналы RabbitMQ
@@ -18,17 +18,17 @@ const pendingRequests = new RedisController<GenericRabbitResponse | null>('notif
 // Отправка ответа в очередь
 export class RabbitMQRequest<
   T extends keyof RabbitRequestToResponseMap,
-  A extends RabbitActionType
-> implements RabbitPostgresRequestInterface {
+  A extends RabbitPgActionType
+> implements RabbitPgRequestInterface {
   protected _topic: T;
   protected _request_id: string;
   protected _action: A;
-  protected _data: RabbitPostgresRequestAttributes<T, A>['data'];
+  protected _data: RabbitPgRequestAttributes<T, A>['data'];
 
   constructor(
     topic: T,
     action: A,
-    data: RabbitPostgresRequestAttributes<T, A>['data']
+    data: RabbitPgRequestAttributes<T, A>['data']
   ) {
     this._topic = topic;
     this._request_id = uuidv4();
@@ -113,7 +113,7 @@ async function connectToRabbitMQ(retryCount = 3, delay = 5000) {
       connection = await amqp.connect('amqp://localhost');
       channel = await connection.createChannel();
 
-      for (const queue of [...REQUEST_QUEUES, ...RESPONSE_QUEUES]) {
+      for (const queue of [...REQUEST_PG_QUEUES, ...RESPONSE_PG_QUEUES]) {
         await channel.assertQueue(queue, { durable: true });
       }
 
@@ -138,7 +138,7 @@ async function connectToRabbitMQ(retryCount = 3, delay = 5000) {
 
 
 const setupConsumer = () => {
-  for (const queue of RESPONSE_QUEUES) {
+  for (const queue of RESPONSE_PG_QUEUES) {
     channel.consume(queue, async (msg) => {
       if (msg) {
         const stringRequest = msg.content.toString();

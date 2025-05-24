@@ -5,11 +5,11 @@ import Logger from '../shared/utils/Logger';
 
 tdl.configure({
   tdjson: Configuration.tdjson_path,
-  // verbosityLevel: 1
+  verbosityLevel: 1
 })
 
 const userBotConfig = {
-  apiId: API_ID, 
+  apiId: API_ID,
   apiHash: API_HASH,
   useTestDc: false,
   skipOldUpdates: true,
@@ -25,7 +25,7 @@ const userBotConfig = {
 }
 
 const adminBotConfig = {
-  apiId: API_ID, 
+  apiId: API_ID,
   apiHash: API_HASH,
   useTestDc: false,
   skipOldUpdates: true,
@@ -53,18 +53,18 @@ export const adminBotClient = tdl.createClient(adminBotConfig);
 userBotClient.invoke({
   _: 'setLogStream',
   log_stream: {
-      _: 'logStreamFile',
-      path: 'bot_tdlib.log', // Replace with your desired log file path
-      max_file_size: 52428800 // 50mb
+    _: 'logStreamFile',
+    path: 'bot_tdlib.log', // Replace with your desired log file path
+    max_file_size: 52428800 // 50mb
   }
 });
 
 adminBotClient.invoke({
   _: 'setLogStream',
   log_stream: {
-      _: 'logStreamFile',
-      path: 'tdlib.log', // Replace with your desired log file path
-      max_file_size: 52428800 // 50 mb
+    _: 'logStreamFile',
+    path: 'tdlib.log', // Replace with your desired log file path
+    max_file_size: 52428800 // 50 mb
   }
 });
 
