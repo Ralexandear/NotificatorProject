@@ -7,20 +7,22 @@ import { RabbitMQRequest } from "../../../RabbitMQ";
 import { LabomatixOrderAttributes } from "../../../shared/interfaces/database/LabomatixOrderAttributes";
 import Logger from "../../../shared/utils/Logger";
 import { bot } from "../../../telegram/TelegramBot";
+import { userbot } from "../../../telegram/UserBot";
 import { addTimeToTimeString } from "../../../utils/addTimeToTimeString";
+import { sleep } from "../../../utils/sleep";
 
-export async function processOrder(order: LabomatixOrderAttributes, text: string) {
+export async function processOrder(order: LabomatixOrderAttributes, text: string, chatId: number) {
   Logger.log('Processing order', order.id, 'for message', order.messageId);
-  const {packetNumber, place, time} = extractPackageInfo(text);
+  const { packetNumber, place, time } = extractPackageInfo(text);
   const placeFormatted = place?.replace(/дц\s/i, '') || null;
 
   order.packetNumber = packetNumber ? Number(packetNumber) : null;
   order.status = 'PROCESSING'
-  
+
   try {
     const shop = await ShopController.findByName(place, placeFormatted);
 
-    if (! shop) {
+    if (!shop) {
       const messageText = 'ДЦ НЕ НАЙДЕН\n\n' + text;
       await bot.sendMessage(Configuration.target_group_id, messageText);
       Logger.warn('Shop not found!')
@@ -31,14 +33,14 @@ export async function processOrder(order: LabomatixOrderAttributes, text: string
 
     const schema = await LogisticSchemaController.findCurrentCourierId(shop.id);
 
-    if (! schema) {
+    if (!schema) {
       Logger.warn('Schema not found, order', order.id)
       return
     }
 
     const point = await PointController.getById(schema.pointId);
 
-    if (! point) {
+    if (!point) {
       Logger.warn('Point not found, order', order.id)
       return
     }
@@ -49,18 +51,26 @@ export async function processOrder(order: LabomatixOrderAttributes, text: string
       return [today.getHours(), today.getMinutes()].join(':')
     })();
 
-    const newTime = addTimeToTimeString(timeToIncrease , 0, Configuration.delivery_time)
+    const newTime = addTimeToTimeString(timeToIncrease, 0, Configuration.delivery_time)
 
     const messageText = [
       point.name + ' ✚',
-    `<b>${shop.name}</b>`,
+      `<b>${shop.name}</b>`,
       `🛻 <code>${shop.address}</code>`,
       'Доставить до: ' + newTime,
       '✚ Лабомат'
     ].join('\n');
 
+    // await new RabbitMQRequest('')
+
     await bot.sendMessage(Configuration.target_group_id, messageText)
     order.status = 'FINISHED'
+
+    // Задержка на случайный интервал от 4 до 7 секунд
+    const randomDelay = 4000 + Math.floor(Math.random() * 3000); // 4000–6999 мс
+    await sleep(randomDelay);
+
+    await userbot.addMessageReaction(chatId, order.messageId, '👍')
   } catch (error) {
     Logger.error("Error while processing order", error)
   } finally {
@@ -167,76 +177,3 @@ function extractPackageInfo(text: string) {
 //               "offset": 27,
 //               "length": 5,
 //               "type": {
-//                 "_": "textEntityTypeBold"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 27,
-//               "length": 5,
-//               "type": {
-//                 "_": "textEntityTypeItalic"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 32,
-//               "length": 11,
-//               "type": {
-//                 "_": "textEntityTypeBold"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 32,
-//               "length": 11,
-//               "type": {
-//                 "_": "textEntityTypeItalic"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 52,
-//               "length": 14,
-//               "type": {
-//                 "_": "textEntityTypeBold"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 52,
-//               "length": 14,
-//               "type": {
-//                 "_": "textEntityTypeItalic"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 77,
-//               "length": 10,
-//               "type": {
-//                 "_": "textEntityTypePhoneNumber"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 77,
-//               "length": 10,
-//               "type": {
-//                 "_": "textEntityTypeBold"
-//               }
-//             },
-//             {
-//               "_": "textEntity",
-//               "offset": 77,
-//               "length": 10,
-//               "type": {
-//                 "_": "textEntityTypeItalic"
-//               }
-//             }
-//           ]
-//         }
-//       }
-//     }
-//   },
-// )

@@ -4,8 +4,7 @@ import { RABBIT_RESPONSE_TIMEOUT } from './constants';
 import { FatalError } from './shared/errors/FatalError';
 import { v4 as uuidv4 } from 'uuid';
 import RedisController from './database/controllers/RedisController';
-import { GenericRabbitResponse, RabbitRequestToResponseMap, RabbitResponseAttributes, RESPONSE_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgResponseAttributes';
-import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestInterface, REQUEST_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgRequestAttributes';
+import { GenericRabbitResponse, RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestInterface, RabbitRequestToResponseMap, RabbitResponseAttributes, REQUEST_PG_QUEUES, RESPONSE_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPostgresAttributes';
 
 
 // Соединение и каналы RabbitMQ

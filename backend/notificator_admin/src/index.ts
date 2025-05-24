@@ -2,12 +2,14 @@ import './configurations'
 import { IS_PRODUCTION } from './constants';
 import { saveUserbotUpdateToMongo } from './database/mongo';
 import './telegram/TelegramBot';
-import { UserBot } from './telegram/UserBot';
 import fs from 'fs';
-import NewMessageHandler from './handlers/userbot/NewMessageHandler';
+import NewMessageHandler from './handlers/userbot/message';
 import { FatalError } from './shared/errors/FatalError';
 import Logger from './shared/utils/Logger';
 import { rabbitInitializationPromise } from './RabbitMQ';
+import { bot } from './telegram/TelegramBot';
+import { sleep } from './utils/sleep';
+import { userbot } from './telegram/UserBot';
 
 
 
@@ -15,28 +17,23 @@ if (!IS_PRODUCTION) {
   Logger.useDebug();
 }
 
-// // Создаём потоки для перенаправления стандартного вывода и ошибок
-// const logFile = fs.createWriteStream('output.log', { flags: 'a' });
-// const errorFile = fs.createWriteStream('error.log', { flags: 'a' });
 
-// const logStream = new (require('stream').Writable)({
-//   write(chunk: any, encoding: any, callback: any) {
-//     process.stdout.write(chunk); // Вывод в консоль
-//     logFile.write(chunk); // Запись в файл
-//     callback();
-//   }
-// });
 
-// const errorStream = new (require('stream').Writable)({
-//   write(chunk: any, encoding: any, callback: any) {
-//     process.stderr.write(chunk); // Вывод в консоль ошибок
-//     errorFile.write(chunk); // Запись в файл ошибок
-//     callback();
-//   }
-// });
+const originalStdoutWrite = process.stdout.write.bind(process.stdout);
+const originalStderrWrite = process.stderr.write.bind(process.stderr);
 
-// process.stdout.write = logStream.write.bind(logStream);
-// process.stderr.write = errorStream.write.bind(errorStream);
+const logFile = fs.createWriteStream('output.log', { flags: 'a' });
+const errorFile = fs.createWriteStream('error.log', { flags: 'a' });
+
+process.stdout.write = (chunk: any, ...args: any[]) => {
+  logFile.write(chunk);
+  return originalStdoutWrite(chunk, ...args);
+};
+
+process.stderr.write = (chunk: any, ...args: any[]) => {
+  errorFile.write(chunk);
+  return originalStderrWrite(chunk, ...args);
+};
 
 
 
@@ -46,11 +43,14 @@ if (!IS_PRODUCTION) {
 
 // Основной процесс
 const initializationPromise = (async () => {
-  await UserBot.isReady();
+  await userbot.isReady();
+  await sleep(3000)
 
-  // await rabbitInitializationPromise;
   // await bot.isReady();
+  // await sleep(3000)
+  Logger.log('Telegram bots are ready');
 
+  await rabbitInitializationPromise;
 })();
 
 async function main() {
@@ -58,7 +58,7 @@ async function main() {
 
   Logger.log('Ready to get updates')
 
-  UserBot.client.on('update', (update) => {
+  userbot.client.on('update', (update) => {
     Logger.info('Userbot received update', JSON.stringify(update));
 
     saveUserbotUpdateToMongo(update)

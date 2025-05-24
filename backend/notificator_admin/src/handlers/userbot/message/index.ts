@@ -1,9 +1,9 @@
 import { updateNewMessage } from "tdlib-types";
-import { LabomatixOrderController } from "../../database/controllers/LabomatixOrderController";
-import { bot } from "../../telegram/TelegramBot";
-import { Configuration } from "../../Configuration";
-import Logger from "../../shared/utils/Logger";
-import { processOrder } from "./functions/processOrder";
+import { LabomatixOrderController } from "../../../database/controllers/LabomatixOrderController";
+import { bot } from "../../../telegram/TelegramBot";
+import { Configuration } from "../../../Configuration";
+import Logger from "../../../shared/utils/Logger";
+import { processOrder } from "./processOrder";
 
 
 
@@ -40,6 +40,6 @@ export default async function NewMessageHandler(update: updateNewMessage, mongoU
     const order = await LabomatixOrderController.create(messageId, mongoUpdateId)
     Logger.log(mongoUpdateId, 'Labomatix order created id:', order.id);
 
-    await processOrder(order, text)
+    await processOrder(order, text, chatId)
   }
 }

@@ -6,8 +6,7 @@ import Logger from '../shared/utils/Logger';
 import { FatalError } from '../shared/errors/FatalError';
 
 
-const delayBetweenRequests = 4 // seconds
-
+const delayBetweenRequests = 5 // seconds
 
 
 //@ts-ignore
@@ -20,11 +19,11 @@ export class UserBotClass extends TelegramBot {
     if (this._isInit) return this._instance;
     else this._isInit = true;
 
-    // Logger.log('UserBot waiting for bot')
+    // Logger.log('userbot waiting for bot')
     const bot = this._instance = new UserBotClass(userBotClient); // Создаём экземпляр
     bot.initializationPromise = userBotClient.login()
       .then(async () => {
-        console.log('UserBot is ready')
+        console.log('userbot is ready')
         await bot.getMe()
       })
       .catch((error) => {
@@ -75,7 +74,7 @@ export class UserBotClass extends TelegramBot {
     }) as unknown as availableReactions;
 
     Logger.info('Recieved available reactions for message', messageId, 'in chat', chatId)
-    Logger.debug(availableReactions)
+    Logger.debug(JSON.stringify(availableReactions, null, 2))
 
     return availableReactions
   }
@@ -130,7 +129,7 @@ export class UserBotClass extends TelegramBot {
 }
 
 
-export const UserBot = UserBotClass.login();
+export const userbot = UserBotClass.login();
 
 
 
@@ -234,7 +233,7 @@ while (true) {
     bot._initializationPromise = client.login()
       .then(async () => {
         await bot.getMe();
-        Logger.log('UserBot is ready');
+        Logger.log('userbot is ready');
       })
       .catch((error) => {
         Logger.error(error);
