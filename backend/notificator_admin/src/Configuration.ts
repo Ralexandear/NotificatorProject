@@ -51,5 +51,9 @@ export class Configuration {
     config.delivery_time = timeInMinutes
     updateConfig()
   }
+
+  static get timezone_offset() {
+    return config.timezone_offset as number
+  }
 }
 

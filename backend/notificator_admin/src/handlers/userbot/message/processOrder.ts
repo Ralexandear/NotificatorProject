@@ -9,10 +9,16 @@ import Logger from "../../../shared/utils/Logger";
 import { bot } from "../../../telegram/TelegramBot";
 import { userbot } from "../../../telegram/UserBot";
 import { addTimeToTimeString } from "../../../utils/addTimeToTimeString";
+import { LocalDate } from "../../../utils/LocalDate";
 import { sleep } from "../../../utils/sleep";
 
 export async function processOrder(order: LabomatixOrderAttributes, text: string, chatId: number) {
   Logger.log('Processing order', order.id, 'for message', order.messageId);
+  if (new LocalDate().getHours() > 19) {
+    Logger.warn('Processing order after 19:00, skipping', order.id);
+    return;
+  }
+
   const { packetNumber, place, time } = extractPackageInfo(text);
   const placeFormatted = place?.replace(/дц\s/i, '') || null;
 
@@ -65,8 +71,8 @@ export async function processOrder(order: LabomatixOrderAttributes, text: string
 
     const response = await new RabbitTelegramRequest(messageText).send()
 
-    if (! response) return
-    
+    if (!response) return
+
     order.status = 'FINISHED'
 
     // Задержка на случайный интервал от 4 до 7 секунд
