@@ -1,6 +1,6 @@
 import ShiftController from "../database/controllers/ShiftController";
 import { ValidationError } from "../shared/errors/ValidationError";
-import { RabbitPgRequestGeneric } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
+import { RabbitPgRequestGeneric } from "../shared/interfaces/rabbitMQ/RabbitPostgresAttributes";
 
 export async function ShiftEventHandlder(event: RabbitPgRequestGeneric) {
   if (event.topic !== 'notificator-db-shift-requests') {

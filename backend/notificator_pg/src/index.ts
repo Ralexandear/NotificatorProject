@@ -1,17 +1,17 @@
 import amqp from 'amqplib';
 import Logger from './shared/utils/Logger';
-import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType, REQUEST_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgRequestAttributes';
 import { LabomatixOrderEventHandler } from './handlers/LabomatixOrderEventHandler';
 import { ValidationError } from './shared/errors/ValidationError';
 import { ShopEventHandlder } from './handlers/ShopEventHandler';
 import { databaseInitializationPromise } from './database';
 import { FatalError } from './shared/errors/FatalError';
 import PointController from './database/controllers/PointContoller';
-import { RabbitResponseStatus, RabbitResponseTopicNameType, RESPONSE_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPgResponseAttributes';
 import { LogisticSchemaEventHandler } from './handlers/LogisticSchemaEventHandler';
 import { ShiftEventHandlder } from './handlers/ShiftEventController';
 import { UserEventHandlder } from './handlers/UserEventHandler';
 import { PointEventHandler } from './handlers/PointEventHandler';
+import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType, RabbitResponseTopicNameType, REQUEST_PG_QUEUES, RESPONSE_PG_QUEUES } from './shared/interfaces/rabbitMQ/RabbitPostgresAttributes';
+import { RabbitResponseStatus } from './shared/interfaces/rabbitMQ';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 Logger.log(IS_PRODUCTION ? 'Production mode' : 'Development mode');
@@ -154,7 +154,7 @@ const setupConsumer = () => {
         const response = new RabbitMQResponse(responseQueue, data.request_id, data.action, data.data);
 
         try {
-          response.data = await handler(data).then(result => result.toJSON());
+          response.data = await handler(data).then(result => result?.toJSON());
           response.status = response.data ? 'OK' : 'NOT_FOUND';
         } catch (error) {
           if (error instanceof ValidationError) {

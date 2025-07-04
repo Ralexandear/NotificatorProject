@@ -3,7 +3,7 @@ import { LabomatixOrderController } from "../../../database/controllers/Labomati
 import { LogisticSchemaController } from "../../../database/controllers/LogisticSchemaController";
 import { PointController } from "../../../database/controllers/PointContoller";
 import { ShopController } from "../../../database/controllers/ShopController";
-import { RabbitMQRequest } from "../../../RabbitMQ";
+import { RabbitMQRequest, RabbitTelegramRequest } from "../../../RabbitMQ";
 import { LabomatixOrderAttributes } from "../../../shared/interfaces/database/LabomatixOrderAttributes";
 import Logger from "../../../shared/utils/Logger";
 import { bot } from "../../../telegram/TelegramBot";
@@ -23,8 +23,8 @@ export async function processOrder(order: LabomatixOrderAttributes, text: string
     const shop = await ShopController.findByName(place, placeFormatted);
 
     if (!shop) {
-      const messageText = 'ДЦ НЕ НАЙДЕН\n\n' + text;
-      await bot.sendMessage(Configuration.target_group_id, messageText);
+      const messageText = '@HE_operator\n❗️ ДЦ НЕ НАЙДЕН\n\n' + text;
+      await await new RabbitTelegramRequest(messageText).send();
       Logger.warn('Shop not found!')
       return
     }
@@ -63,7 +63,10 @@ export async function processOrder(order: LabomatixOrderAttributes, text: string
 
     // await new RabbitMQRequest('')
 
-    await bot.sendMessage(Configuration.target_group_id, messageText)
+    const response = await new RabbitTelegramRequest(messageText).send()
+
+    if (! response) return
+    
     order.status = 'FINISHED'
 
     // Задержка на случайный интервал от 4 до 7 секунд

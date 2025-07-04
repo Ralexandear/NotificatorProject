@@ -1,6 +1,6 @@
 import LogisticSchemaController from "../database/controllers/LogisticSchemaController";
 import { ValidationError } from "../shared/errors/ValidationError";
-import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType } from "../shared/interfaces/rabbitMQ/RabbitPgRequestAttributes";
+import { RabbitPgActionType, RabbitPgRequestAttributes, RabbitPgRequestTopicNameType } from "../shared/interfaces/rabbitMQ/RabbitPostgresAttributes";
 
 export async function LogisticSchemaEventHandler(event: RabbitPgRequestAttributes<RabbitPgRequestTopicNameType, RabbitPgActionType>) {
   if (event.topic !== 'notificator-db-logistic-requests') {

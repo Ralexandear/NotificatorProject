@@ -38,6 +38,10 @@ export default async function NewMessageHandler(update: updateNewMessage, mongoU
 
     Logger.log(mongoUpdateId, 'Saving labomatix order to postgres');
     const order = await LabomatixOrderController.create(messageId, mongoUpdateId)
+    if (!order) {
+      Logger.error(mongoUpdateId, 'Failed to create labomatix order');
+      return;
+    }
     Logger.log(mongoUpdateId, 'Labomatix order created id:', order.id);
 
     await processOrder(order, text, chatId)
